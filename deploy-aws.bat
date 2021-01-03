@@ -1,0 +1,1 @@
+scp -i "/c/aws/ssh/keypair-ec2.pem" target/aflcv-back-0.0.1-SNAPSHOT.jar ec2-user@ec2-18-157-252-11.eu-central-1.compute.amazonaws.com:/home/ec2-user/app.jar

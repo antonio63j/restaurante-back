@@ -1,0 +1,276 @@
+2020-12-24 18:14:31,068 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-12-24 18:14:31,092 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 20 ms
+2020-12-24 18:14:31,727 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-2] insert into usuarios (acepta_emails, apellidos, cod_activacion, cod_cambio_passw, email, enabled, esperando_cambio_passw, fecha_activado, fecha_registro, fecha_sol_cambio_passw, nombre, password, telefono, username) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2020-12-24 18:16:57,357 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting BootApplicationAflcv on antonioPortatil with PID 15508 (C:\Proyectos\AngularSpring\restaurante\restaurante-back\target\classes started by antonio in C:\Proyectos\AngularSpring\restaurante\restaurante-back)
+2020-12-24 18:16:57,362 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.2.2.RELEASE, Spring v5.2.2.RELEASE
+2020-12-24 18:16:57,363 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-12-24 18:16:57,459 INFO org.springframework.boot.logging.DeferredLog [restartedMain] The Class-Path manifest attribute in C:\Users\antonio\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.2\jaxb-runtime-2.3.2.jar referenced one or more files that do not exist: file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.xml.bind-api-2.3.2.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/txw2-2.3.2.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/istack-commons-runtime-3.0.8.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/stax-ex-1.8.1.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/FastInfoset-1.2.16.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.activation-api-1.2.1.jar
+2020-12-24 18:16:57,459 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-12-24 18:16:57,460 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-12-24 18:16:59,076 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-12-24 18:16:59,359 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 262ms. Found 5 JPA repository interfaces.
+2020-12-24 18:17:00,243 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 18:17:00,304 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 18:17:00,314 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 18:17:00,319 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@42915559' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 18:17:00,321 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 18:17:00,331 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 18:17:01,872 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2020-12-24 18:17:01,890 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2020-12-24 18:17:01,892 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2020-12-24 18:17:01,893 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.29]
+2020-12-24 18:17:02,129 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2020-12-24 18:17:02,131 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 4671 ms
+2020-12-24 18:17:02,509 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-24 18:17:02,666 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate Core {5.4.9.Final}
+2020-12-24 18:17:03,007 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-24 18:17:03,176 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2020-12-24 18:17:03,485 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2020-12-24 18:17:03,516 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2020-12-24 18:17:05,254 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto drop constraint FK391t9hcdgfjcs6f7xf4khf1sp
+2020-12-24 18:17:05,258 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta drop constraint FKq87ke7fdkv8d2yjc4ili8pg1t
+2020-12-24 18:17:05,260 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta drop constraint FKn0ya56kcb23nev3x5pxemuw76
+2020-12-24 18:17:05,261 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles drop constraint FKihom0uklpkfpffipxpoyf7b74
+2020-12-24 18:17:05,263 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles drop constraint FKqcxu02bqipxpr7cjyj9dmhwec
+2020-12-24 18:17:05,264 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists clientes cascade
+2020-12-24 18:17:05,275 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists cursos cascade
+2020-12-24 18:17:05,279 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists herramienta cascade
+2020-12-24 18:17:05,287 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists proyecto cascade
+2020-12-24 18:17:05,295 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists proyecto_herramienta cascade
+2020-12-24 18:17:05,299 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists roles cascade
+2020-12-24 18:17:05,305 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists usuarios cascade
+2020-12-24 18:17:05,315 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists usuarios_roles cascade
+2020-12-24 18:17:05,322 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table clientes (id  bigserial not null, actividad TEXT, cliente varchar(255), clientefoto varchar(255), empresa varchar(255), empresafoto varchar(255), experiencia TEXT, fin date, inicio date, sector varchar(255), primary key (id))
+2020-12-24 18:17:05,336 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table cursos (id  bigserial not null, fin date, horas int4, inicio date, nombre varchar(100) not null, primary key (id))
+2020-12-24 18:17:05,345 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table herramienta (id  bigserial not null, comentario varchar(80), nivel varchar(255), nombre varchar(80), tipo varchar(255), primary key (id))
+2020-12-24 18:17:05,356 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table proyecto (id  bigserial not null, descripcion TEXT, fin date not null, inicio date not null, nombre varchar(79) not null, cliente_id int8, primary key (id))
+2020-12-24 18:17:05,369 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table proyecto_herramienta (proyecto_id int8 not null, herramienta_id int8 not null)
+2020-12-24 18:17:05,372 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table roles (id  bigserial not null, nombre varchar(20), primary key (id))
+2020-12-24 18:17:05,382 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table usuarios (id  bigserial not null, acepta_emails boolean, apellidos varchar(255), cod_activacion varchar(80), cod_cambio_passw varchar(80), email varchar(255), enabled boolean, esperando_cambio_passw boolean, fecha_activado date, fecha_registro TIMESTAMP, fecha_sol_cambio_passw date, nombre varchar(255), password varchar(60) not null, telefono varchar(255), username varchar(60) not null, primary key (id))
+2020-12-24 18:17:05,396 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table usuarios_roles (usuario_id int8 not null, role_id int8 not null)
+2020-12-24 18:17:05,399 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table clientes add constraint UKteoa9ce3xv2ajahs0lgfoll2v unique (empresa, cliente, inicio)
+2020-12-24 18:17:05,404 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table herramienta add constraint UK_r2962ann3eaimg1plgafqssu1 unique (nombre)
+2020-12-24 18:17:05,409 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto add constraint UK_gvu9yy8rcb4h2hr1f6av0f0ml unique (nombre)
+2020-12-24 18:17:05,413 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta add constraint UKcabtkqf5f3h1o0ag4146m3fwm unique (proyecto_id, herramienta_id)
+2020-12-24 18:17:05,418 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table roles add constraint UK_ldv0v52e0udsh2h1rs0r0gw1n unique (nombre)
+2020-12-24 18:17:05,422 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios add constraint UK_fe54wcy09qu2gqms03v5hvgf unique (cod_activacion)
+2020-12-24 18:17:05,428 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios add constraint UK_h0em1k5lbnom22yg59fc35728 unique (cod_cambio_passw)
+2020-12-24 18:17:05,432 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios add constraint UK_m2dvbwfge291euvmk6vkkocao unique (username)
+2020-12-24 18:17:05,436 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles add constraint UKqjaspm7473pnu9y4jxhrds8r2 unique (usuario_id, role_id)
+2020-12-24 18:17:05,440 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto add constraint FK391t9hcdgfjcs6f7xf4khf1sp foreign key (cliente_id) references clientes
+2020-12-24 18:17:05,448 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta add constraint FKq87ke7fdkv8d2yjc4ili8pg1t foreign key (herramienta_id) references herramienta
+2020-12-24 18:17:05,454 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta add constraint FKn0ya56kcb23nev3x5pxemuw76 foreign key (proyecto_id) references proyecto
+2020-12-24 18:17:05,458 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles add constraint FKihom0uklpkfpffipxpoyf7b74 foreign key (role_id) references roles
+2020-12-24 18:17:05,465 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles add constraint FKqcxu02bqipxpr7cjyj9dmhwec foreign key (usuario_id) references usuarios
+2020-12-24 18:17:05,479 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-24 18:17:05,493 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-24 18:17:05,529 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2020-12-24 18:17:05,625 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-24 18:17:06,818 INFO com.afl.restaurante.auth.SpringSecurityConfig [restartedMain] En BCryptPasswordEncoder
+2020-12-24 18:17:07,526 WARN org.thymeleaf.templatemode.TemplateMode [restartedMain] [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2020-12-24 18:17:07,571 WARN org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter [restartedMain] Unable to create an RSA verifier from verifierKey (ignoreable if using MAC)
+2020-12-24 18:17:08,940 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: OrRequestMatcher [requestMatchers=[Ant [pattern='/oauth/token'], Ant [pattern='/oauth/token_key'], Ant [pattern='/oauth/check_token']]], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@233131e6, org.springframework.security.web.context.SecurityContextPersistenceFilter@3d7063ad, org.springframework.security.web.header.HeaderWriterFilter@324c6f62, org.springframework.security.web.authentication.logout.LogoutFilter@318a485d, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@34266e89, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3e71245e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@26bd90f4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@46a1fe23, org.springframework.security.web.session.SessionManagementFilter@28706030, org.springframework.security.web.access.ExceptionTranslationFilter@58f5de5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@42ed2404]
+2020-12-24 18:17:09,031 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfiguration$NotOAuthRequestMatcher@73293ac7, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c0794b0, org.springframework.security.web.context.SecurityContextPersistenceFilter@2323b28b, org.springframework.security.web.header.HeaderWriterFilter@1390303c, org.springframework.web.filter.CorsFilter@f698070, org.springframework.security.web.authentication.logout.LogoutFilter@721021b8, org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter@1e953f3f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@218fc4d7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@338c010a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2c359ffd, org.springframework.security.web.session.SessionManagementFilter@56f50b9, org.springframework.security.web.access.ExceptionTranslationFilter@6d4dec74, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38337991]
+2020-12-24 18:17:09,038 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@458ead14, org.springframework.security.web.context.SecurityContextPersistenceFilter@5f466f51, org.springframework.security.web.header.HeaderWriterFilter@88d0097, org.springframework.security.web.authentication.logout.LogoutFilter@351451a7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3695059c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@567c3261, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77d4727, org.springframework.security.web.session.SessionManagementFilter@15035689, org.springframework.security.web.access.ExceptionTranslationFilter@40e52bfe, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@76d5b049]
+2020-12-24 18:17:09,253 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2020-12-24 18:17:09,290 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2020-12-24 18:17:09,293 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BootApplicationAflcv in 12.89 seconds (JVM running for 13.863)
+2020-12-24 18:19:48,951 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-24 18:19:48,952 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-12-24 18:19:48,983 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 30 ms
+2020-12-24 18:19:49,523 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-2] insert into usuarios (acepta_emails, apellidos, cod_activacion, cod_cambio_passw, email, enabled, esperando_cambio_passw, fecha_activado, fecha_registro, fecha_sol_cambio_passw, nombre, password, telefono, username) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2020-12-24 18:20:32,016 DEBUG com.afl.restaurante.controllers.UsuarioControlerMvc [http-nio-8080-exec-3] [usuario activadoo, ok]
+2020-12-24 18:22:38,308 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-10] select usuario0_.id as id1_6_, usuario0_.acepta_emails as acepta_e2_6_, usuario0_.apellidos as apellido3_6_, usuario0_.cod_activacion as cod_acti4_6_, usuario0_.cod_cambio_passw as cod_camb5_6_, usuario0_.email as email6_6_, usuario0_.enabled as enabled7_6_, usuario0_.esperando_cambio_passw as esperand8_6_, usuario0_.fecha_activado as fecha_ac9_6_, usuario0_.fecha_registro as fecha_r10_6_, usuario0_.fecha_sol_cambio_passw as fecha_s11_6_, usuario0_.nombre as nombre12_6_, usuario0_.password as passwor13_6_, usuario0_.telefono as telefon14_6_, usuario0_.username as usernam15_6_ from usuarios usuario0_ where usuario0_.username=?
+2020-12-24 18:22:38,333 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-10] select roles0_.usuario_id as usuario_1_7_0_, roles0_.role_id as role_id2_7_0_, role1_.id as id1_5_1_, role1_.nombre as nombre2_5_1_ from usuarios_roles roles0_ inner join roles role1_ on roles0_.role_id=role1_.id where roles0_.usuario_id=?
+2020-12-24 18:22:38,360 ERROR org.springframework.security.oauth2.provider.endpoint.TokenEndpoint [http-nio-8080-exec-10] Handling error: InternalAuthenticationServiceException, null
+org.springframework.security.authentication.InternalAuthenticationServiceException: null
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:123)
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:144)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:175)
+	at org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter.getOAuth2Authentication(ResourceOwnerPasswordTokenGranter.java:71)
+	at org.springframework.security.oauth2.provider.token.AbstractTokenGranter.getAccessToken(AbstractTokenGranter.java:72)
+	at org.springframework.security.oauth2.provider.token.AbstractTokenGranter.grant(AbstractTokenGranter.java:67)
+	at org.springframework.security.oauth2.provider.CompositeTokenGranter.grant(CompositeTokenGranter.java:38)
+	at org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer$4.grant(AuthorizationServerEndpointsConfigurer.java:583)
+	at org.springframework.security.oauth2.provider.endpoint.TokenEndpoint.postAccessToken(TokenEndpoint.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:888)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:126)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:90)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:203)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:526)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:367)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:860)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1591)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.NullPointerException: null
+	at com.afl.restaurante.services.UsuarioService.loadUserByUsername(UsuarioService.java:59)
+	at com.afl.restaurante.services.UsuarioService$$FastClassBySpringCGLIB$$74d63f3d.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:769)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:747)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:366)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:99)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:747)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
+	at com.afl.restaurante.services.UsuarioService$$EnhancerBySpringCGLIB$$c166da0e.loadUserByUsername(<generated>)
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:108)
+	... 88 common frames omitted
+2020-12-24 19:00:57,579 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting BootApplicationAflcv on antonioPortatil with PID 19480 (C:\Proyectos\AngularSpring\restaurante\restaurante-back\target\classes started by antonio in C:\Proyectos\AngularSpring\restaurante\restaurante-back)
+2020-12-24 19:00:57,585 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.2.2.RELEASE, Spring v5.2.2.RELEASE
+2020-12-24 19:00:57,586 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-12-24 19:00:57,689 INFO org.springframework.boot.logging.DeferredLog [restartedMain] The Class-Path manifest attribute in C:\Users\antonio\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.2\jaxb-runtime-2.3.2.jar referenced one or more files that do not exist: file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.xml.bind-api-2.3.2.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/txw2-2.3.2.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/istack-commons-runtime-3.0.8.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/stax-ex-1.8.1.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/FastInfoset-1.2.16.jar,file:/C:/Users/antonio/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.activation-api-1.2.1.jar
+2020-12-24 19:00:57,690 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-12-24 19:00:57,691 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-12-24 19:00:59,159 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-12-24 19:00:59,322 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 147ms. Found 5 JPA repository interfaces.
+2020-12-24 19:01:00,254 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 19:01:00,309 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 19:01:00,317 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 19:01:00,323 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@b5f3df4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 19:01:00,333 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 19:01:00,345 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-24 19:01:01,603 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2020-12-24 19:01:01,620 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2020-12-24 19:01:01,621 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2020-12-24 19:01:01,621 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.29]
+2020-12-24 19:01:01,781 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2020-12-24 19:01:01,782 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 4091 ms
+2020-12-24 19:01:02,291 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-24 19:01:02,504 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate Core {5.4.9.Final}
+2020-12-24 19:01:02,787 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-24 19:01:02,955 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2020-12-24 19:01:03,144 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2020-12-24 19:01:03,196 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2020-12-24 19:01:04,639 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto drop constraint FK391t9hcdgfjcs6f7xf4khf1sp
+2020-12-24 19:01:04,644 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta drop constraint FKq87ke7fdkv8d2yjc4ili8pg1t
+2020-12-24 19:01:04,645 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta drop constraint FKn0ya56kcb23nev3x5pxemuw76
+2020-12-24 19:01:04,647 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles drop constraint FKihom0uklpkfpffipxpoyf7b74
+2020-12-24 19:01:04,648 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles drop constraint FKqcxu02bqipxpr7cjyj9dmhwec
+2020-12-24 19:01:04,649 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists clientes cascade
+2020-12-24 19:01:04,661 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists cursos cascade
+2020-12-24 19:01:04,666 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists herramienta cascade
+2020-12-24 19:01:04,673 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists proyecto cascade
+2020-12-24 19:01:04,680 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists proyecto_herramienta cascade
+2020-12-24 19:01:04,684 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists roles cascade
+2020-12-24 19:01:04,689 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists usuarios cascade
+2020-12-24 19:01:04,698 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] drop table if exists usuarios_roles cascade
+2020-12-24 19:01:04,705 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table clientes (id  bigserial not null, actividad TEXT, cliente varchar(255), clientefoto varchar(255), empresa varchar(255), empresafoto varchar(255), experiencia TEXT, fin date, inicio date, sector varchar(255), primary key (id))
+2020-12-24 19:01:04,717 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table cursos (id  bigserial not null, fin date, horas int4, inicio date, nombre varchar(100) not null, primary key (id))
+2020-12-24 19:01:04,726 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table herramienta (id  bigserial not null, comentario varchar(80), nivel varchar(255), nombre varchar(80), tipo varchar(255), primary key (id))
+2020-12-24 19:01:04,741 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table proyecto (id  bigserial not null, descripcion TEXT, fin date not null, inicio date not null, nombre varchar(79) not null, cliente_id int8, primary key (id))
+2020-12-24 19:01:04,756 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table proyecto_herramienta (proyecto_id int8 not null, herramienta_id int8 not null)
+2020-12-24 19:01:04,759 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table roles (id  bigserial not null, nombre varchar(20), primary key (id))
+2020-12-24 19:01:04,770 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table usuarios (id  bigserial not null, acepta_emails boolean, apellidos varchar(255), cod_activacion varchar(80), cod_cambio_passw varchar(80), email varchar(255), enabled boolean, esperando_cambio_passw boolean, fecha_activado date, fecha_registro TIMESTAMP, fecha_sol_cambio_passw date, nombre varchar(255), password varchar(60) not null, telefono varchar(255), username varchar(60) not null, primary key (id))
+2020-12-24 19:01:04,786 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] create table usuarios_roles (usuario_id int8 not null, role_id int8 not null)
+2020-12-24 19:01:04,788 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table clientes add constraint UKteoa9ce3xv2ajahs0lgfoll2v unique (empresa, cliente, inicio)
+2020-12-24 19:01:04,793 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table herramienta add constraint UK_r2962ann3eaimg1plgafqssu1 unique (nombre)
+2020-12-24 19:01:04,796 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto add constraint UK_gvu9yy8rcb4h2hr1f6av0f0ml unique (nombre)
+2020-12-24 19:01:04,800 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta add constraint UKcabtkqf5f3h1o0ag4146m3fwm unique (proyecto_id, herramienta_id)
+2020-12-24 19:01:04,803 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table roles add constraint UK_ldv0v52e0udsh2h1rs0r0gw1n unique (nombre)
+2020-12-24 19:01:04,806 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios add constraint UK_fe54wcy09qu2gqms03v5hvgf unique (cod_activacion)
+2020-12-24 19:01:04,811 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios add constraint UK_h0em1k5lbnom22yg59fc35728 unique (cod_cambio_passw)
+2020-12-24 19:01:04,814 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios add constraint UK_m2dvbwfge291euvmk6vkkocao unique (username)
+2020-12-24 19:01:04,817 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles add constraint UKqjaspm7473pnu9y4jxhrds8r2 unique (usuario_id, role_id)
+2020-12-24 19:01:04,822 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto add constraint FK391t9hcdgfjcs6f7xf4khf1sp foreign key (cliente_id) references clientes
+2020-12-24 19:01:04,829 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta add constraint FKq87ke7fdkv8d2yjc4ili8pg1t foreign key (herramienta_id) references herramienta
+2020-12-24 19:01:04,835 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table proyecto_herramienta add constraint FKn0ya56kcb23nev3x5pxemuw76 foreign key (proyecto_id) references proyecto
+2020-12-24 19:01:04,837 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles add constraint FKihom0uklpkfpffipxpoyf7b74 foreign key (role_id) references roles
+2020-12-24 19:01:04,843 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [restartedMain] alter table usuarios_roles add constraint FKqcxu02bqipxpr7cjyj9dmhwec foreign key (usuario_id) references usuarios
+2020-12-24 19:01:04,852 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-24 19:01:04,861 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-24 19:01:04,889 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2020-12-24 19:01:04,989 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-24 19:01:06,431 INFO com.afl.restaurante.auth.SpringSecurityConfig [restartedMain] En BCryptPasswordEncoder
+2020-12-24 19:01:07,320 WARN org.thymeleaf.templatemode.TemplateMode [restartedMain] [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2020-12-24 19:01:07,379 WARN org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter [restartedMain] Unable to create an RSA verifier from verifierKey (ignoreable if using MAC)
+2020-12-24 19:01:08,813 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: OrRequestMatcher [requestMatchers=[Ant [pattern='/oauth/token'], Ant [pattern='/oauth/token_key'], Ant [pattern='/oauth/check_token']]], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2d6d0ef4, org.springframework.security.web.context.SecurityContextPersistenceFilter@61cb87f0, org.springframework.security.web.header.HeaderWriterFilter@1ce43bb0, org.springframework.security.web.authentication.logout.LogoutFilter@5f7ee486, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@46a4b28c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a7a6c95, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5fdd56ae, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2125032, org.springframework.security.web.session.SessionManagementFilter@54790112, org.springframework.security.web.access.ExceptionTranslationFilter@22b7a14e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@635adc9a]
+2020-12-24 19:01:08,837 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfiguration$NotOAuthRequestMatcher@4b5af314, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67d45453, org.springframework.security.web.context.SecurityContextPersistenceFilter@675e0f10, org.springframework.security.web.header.HeaderWriterFilter@3af25c88, org.springframework.web.filter.CorsFilter@5049c493, org.springframework.security.web.authentication.logout.LogoutFilter@4063a0cc, org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter@3cbde125, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6fbdfbe9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4783ec8a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6454db47, org.springframework.security.web.session.SessionManagementFilter@20361ee5, org.springframework.security.web.access.ExceptionTranslationFilter@34b79b81, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@610ab461]
+2020-12-24 19:01:08,844 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2d1678e8, org.springframework.security.web.context.SecurityContextPersistenceFilter@43ebcf27, org.springframework.security.web.header.HeaderWriterFilter@4c55a049, org.springframework.security.web.authentication.logout.LogoutFilter@2a7a7eb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7181bcc1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@10b71d50, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@369ad121, org.springframework.security.web.session.SessionManagementFilter@1862ee46, org.springframework.security.web.access.ExceptionTranslationFilter@39c16338, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3091d014]
+2020-12-24 19:01:09,000 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2020-12-24 19:01:09,037 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2020-12-24 19:01:09,040 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started BootApplicationAflcv in 12.354 seconds (JVM running for 13.455)
+2020-12-24 19:01:46,568 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-24 19:01:46,568 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-12-24 19:01:46,582 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 13 ms
+2020-12-24 19:01:47,096 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-2] insert into usuarios (acepta_emails, apellidos, cod_activacion, cod_cambio_passw, email, enabled, esperando_cambio_passw, fecha_activado, fecha_registro, fecha_sol_cambio_passw, nombre, password, telefono, username) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2020-12-24 19:02:10,180 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-4] select usuario0_.id as id1_6_, usuario0_.acepta_emails as acepta_e2_6_, usuario0_.apellidos as apellido3_6_, usuario0_.cod_activacion as cod_acti4_6_, usuario0_.cod_cambio_passw as cod_camb5_6_, usuario0_.email as email6_6_, usuario0_.enabled as enabled7_6_, usuario0_.esperando_cambio_passw as esperand8_6_, usuario0_.fecha_activado as fecha_ac9_6_, usuario0_.fecha_registro as fecha_r10_6_, usuario0_.fecha_sol_cambio_passw as fecha_s11_6_, usuario0_.nombre as nombre12_6_, usuario0_.password as passwor13_6_, usuario0_.telefono as telefon14_6_, usuario0_.username as usernam15_6_ from usuarios usuario0_ where usuario0_.username=?
+2020-12-24 19:02:10,205 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-4] select roles0_.usuario_id as usuario_1_7_0_, roles0_.role_id as role_id2_7_0_, role1_.id as id1_5_1_, role1_.nombre as nombre2_5_1_ from usuarios_roles roles0_ inner join roles role1_ on roles0_.role_id=role1_.id where roles0_.usuario_id=?
+2020-12-24 19:02:10,217 WARN org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder [http-nio-8080-exec-4] Encoded password does not look like BCrypt
+2020-12-24 19:02:10,227 WARN org.springframework.security.oauth2.provider.endpoint.TokenEndpoint [http-nio-8080-exec-4] Handling error: InvalidGrantException, Bad credentials
+2020-12-24 19:19:25,693 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-6] select usuario0_.id as id1_6_, usuario0_.acepta_emails as acepta_e2_6_, usuario0_.apellidos as apellido3_6_, usuario0_.cod_activacion as cod_acti4_6_, usuario0_.cod_cambio_passw as cod_camb5_6_, usuario0_.email as email6_6_, usuario0_.enabled as enabled7_6_, usuario0_.esperando_cambio_passw as esperand8_6_, usuario0_.fecha_activado as fecha_ac9_6_, usuario0_.fecha_registro as fecha_r10_6_, usuario0_.fecha_sol_cambio_passw as fecha_s11_6_, usuario0_.nombre as nombre12_6_, usuario0_.password as passwor13_6_, usuario0_.telefono as telefon14_6_, usuario0_.username as usernam15_6_ from usuarios usuario0_ where usuario0_.username=?
+2020-12-24 19:19:25,695 DEBUG org.hibernate.engine.jdbc.spi.SqlStatementLogger [http-nio-8080-exec-6] select roles0_.usuario_id as usuario_1_7_0_, roles0_.role_id as role_id2_7_0_, role1_.id as id1_5_1_, role1_.nombre as nombre2_5_1_ from usuarios_roles roles0_ inner join roles role1_ on roles0_.role_id=role1_.id where roles0_.usuario_id=?
+2020-12-24 19:19:25,699 WARN org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder [http-nio-8080-exec-6] Encoded password does not look like BCrypt
+2020-12-24 19:19:25,700 WARN org.springframework.security.oauth2.provider.endpoint.TokenEndpoint [http-nio-8080-exec-6] Handling error: InvalidGrantException, Bad credentials
