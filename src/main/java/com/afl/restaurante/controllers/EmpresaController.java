@@ -1,6 +1,9 @@
 package com.afl.restaurante.controllers;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,11 +16,14 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -25,7 +31,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,10 +42,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.afl.restaurante.entities.Cliente;
 import com.afl.restaurante.entities.Curso;
 import com.afl.restaurante.entities.Empresa;
+import com.afl.restaurante.entities.Slider;
 import com.afl.restaurante.services.IEmpresaService;
+import com.afl.restaurante.services.ISliderService;
+import com.afl.restaurante.services.files.IUploadFileService;
 
 @CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
@@ -47,11 +60,20 @@ import com.afl.restaurante.services.IEmpresaService;
 public class EmpresaController {
 	private Logger log = LoggerFactory.getLogger(CursoController.class);
 
+	@Value("${app.uploadsDir:uploads}")
+	private String uploadsDir;
+	
 	@Autowired
 	private IEmpresaService empresaService;
 	
 	@Autowired
+	private ISliderService sliderService;
+	
+	@Autowired
 	private Empresa empresaStore;
+	
+	@Autowired
+	private IUploadFileService uploadFileService;
 	
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public void messageNotReadableException(
@@ -140,7 +162,159 @@ public class EmpresaController {
 		response.put("empresa", empresaNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
+	
+	// @Secured({"ROLE_ADMIN"})
+	@GetMapping("/empresa/sliders")
+	public List<Slider> index() {
+		List<Slider> sliders = empresaService.findAllSliders();
+		log.info("sliders:");
+		log.info (sliders.toString());
+    	return empresaService.findAllSliders();  	
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@PostMapping("/empresa/slider")
+	public ResponseEntity<?> createSlider(@Valid @RequestBody Slider slider, BindingResult result) {
+		Slider sliderNew = null;
+		Map<String, Object> response = new HashMap<>();
 
+		if (result.hasErrors()) {
+			List<String> errors = result.getFieldErrors().stream()
+					.map(fielderror -> "El campo '" + fielderror.getField() + "' " + fielderror.getDefaultMessage())
+					.collect(Collectors.toList());
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		try {
+			slider.setImgFileName("no-photo");
+			sliderNew = sliderService.save(slider);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "error en el acceso a la base de datos, no ha sido posible crear el slider");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			log.error(response.toString());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "slider creado");
+		response.put("slider", sliderNew);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+    @PutMapping("/empresa/slider")
+	public ResponseEntity<?> updateSlider(@Valid @RequestBody Slider slider, BindingResult result) {
+
+    	Slider sliderUpdated = null;
+    	Slider sliderActual = null;
+		Map<String, Object> response = new HashMap<>();
+		
+		if (result.hasErrors()) {
+			List<String> errors = result.getFieldErrors().stream()
+				.map(fielderror -> "El campo '"+ fielderror.getField() + "' " + fielderror.getDefaultMessage())
+				.collect(Collectors.toList());
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		sliderActual = sliderService.findById(slider.getId());
+		if (sliderActual == null) {
+			response.put("mensaje",	"slider con id=".concat(slider.getId().toString().concat(" no está en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+			sliderActual.setLabel(slider.getLabel());
+			sliderUpdated = sliderService.save(sliderActual);
+
+		} catch (DataAccessException e) {
+			response.put("mensaje", "error al actualizar slider con id=".concat(slider.getId().toString()));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "actualizado slider con id=".concat(slider.getId().toString()));
+		response.put("slider", sliderUpdated);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+		
+	@Secured({"ROLE_ADMIN"})
+	@DeleteMapping("/empresa/slider/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			Slider slider = sliderService.findById(id);
+			String nombreFoto = slider.getImgFileName();
+            uploadFileService.eliminar(nombreFoto);	  
+			sliderService.deleteById(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "slider id=".concat(id.toString().concat(" error al eliminar en la base de datos")));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "slider id=".concat(id.toString().concat(" eliminado de la base de datos")));
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@PostMapping("/empresa/uploads/img")
+	public ResponseEntity<?> uploadFoto(@RequestParam ("archivo") MultipartFile archivo, @RequestParam ("id") Long id) {
+		
+		Slider slider;
+		Map<String, Object> response = new HashMap<>();
+		
+		log.debug ("id=" + id.toString());
+		
+		slider = sliderService.findById(id);
+		if (slider == null) {
+			response.put("mensaje",	"el slider con id=".concat(id.toString().concat(" no está en la base de datos")));
+			response.put("error", "el slidere con id=".concat(id.toString().concat(" no está en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		if (!archivo.isEmpty()) {
+ 	    	String nombreArchivo = null;
+ 	    	try {
+ 	    		nombreArchivo = uploadFileService.copia(archivo);
+			} catch (IOException e) {
+				e.printStackTrace();
+ 				response.put("mensaje",	"slider con id=".concat(id.toString().concat(" error al subir imagen")));
+				response.put("error", "IOException");
+	 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+ 	    	
+ 	    	String nombreFotoAnterior = slider.getImgFileName();
+ 	    	uploadFileService.eliminar(nombreFotoAnterior);
+ 	    	
+ 	    	slider.setImgFileName(nombreArchivo);
+ 			sliderService.save(slider);
+ 			response.put("slider", slider);
+ 			response.put("mensaje", "slider id=".concat(id.toString().concat(" upload OK")));
+		}
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+
+	@GetMapping("/empresa/uploads/img/{nombreFoto:.+}")
+	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
+
+		Resource resource = null;
+		try {
+//			Path path = Paths.get(uploadsDir+"/imagenes").resolve(nombreFoto).toAbsolutePath();
+			Path path = Paths.get(uploadsDir).resolve(nombreFoto).toAbsolutePath();
+
+			log.debug("path:");
+			log.debug(path.toString());
+			
+			resource = uploadFileService.salidaFichero(path);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
+		HttpHeaders cabecera = new HttpHeaders();
+		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+		return new ResponseEntity<Resource>(resource, cabecera, HttpStatus.OK);
+	}
+	
+	
+	
 	//      Auxiliares
 	
 	private void setDatosEmpresa (Empresa empresa) {

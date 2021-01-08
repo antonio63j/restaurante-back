@@ -42,7 +42,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				// .antMatchers(HttpMethod.GET, "/api/adminindex").hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/adminindex").permitAll()
 				
-				.antMatchers(HttpMethod.GET, "/api/empresa").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/empresa", "/api/empresa/uploads/img/**", "/images/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/empresa/sliders").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/empresa/slider", "/api/empresa/img/**").permitAll()
+				.antMatchers(HttpMethod.PUT, "/api/empresa/slider").permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/empresa").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/empresa").permitAll()
 				

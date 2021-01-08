@@ -33,7 +33,7 @@ public class UploadFileServiceImpl implements IUploadFileService {
 		Resource resource = null;
 		resource = new UrlResource(path.toUri());
 	    if(!resource.exists() || !resource.isReadable()) {
-	    	path = getPath("src/main/resources/static/images", "no-user.png");
+	    	path = getPath("src/main/resources/static/images", "no-photo.png");
 			resource = new UrlResource(path.toUri());
 			log.error("Error, no se pudo cargar la imagen " + nombreImagen + " se sustituye por imagen anónima");
 	    };	
@@ -47,7 +47,7 @@ public class UploadFileServiceImpl implements IUploadFileService {
 		Resource resource = null;
 		resource = new UrlResource(path.toUri());
 	    if(!resource.exists() || !resource.isReadable()) {
-	    	Path path2 = getPath("src/main/resources/static/images", "no-user.png");
+	    	Path path2 = getPath("src/main/resources/static/images", "no-photo.png");
 			resource = new UrlResource(path2.toUri());
 			log.error("Error, no se pudo cargar la imagen " + path.toString() + " se sustituye por imagen anónima");
 	    };	
@@ -71,10 +71,20 @@ public class UploadFileServiceImpl implements IUploadFileService {
 			Path rutaFotoAnterior = getPath (DIRECTORIO_UPLOAD, archivo);
 			File archivoFotoAnterior = rutaFotoAnterior.toFile();
 			if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
-				archivoFotoAnterior.delete();
-				return true;
+				if (!archivoFotoAnterior.delete()) {
+					log.debug (" Error al eliminar: " + rutaFotoAnterior.toString() );
+					return false;
+				}
+			   else {
+        		 return true;  
+			   }
+			}	
+			else { 	
+			  log.debug (" Error al eliminar fichero, no existe o no se puede leer: " + rutaFotoAnterior.toString() );
+		  	  return false;
 			}
 		}
+		log.debug (" Error al eliminar archivo, nombre de fichero invalido " + archivo);
 		return false;
 	}
 

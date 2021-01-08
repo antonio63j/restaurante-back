@@ -56,7 +56,7 @@ import com.afl.restaurante.services.files.IUploadFileService;
 
 public class ClienteController {
 
-	public final static String DIRECTORIO_UPLOAD = "www/aflcv-back/uploads";
+	//public final static String DIRECTORIO_UPLOAD = "www/aflcv-back/uploads";
 
 	@Value("${app.uploadsDir:uploads}")
 	private String uploadsDir;
