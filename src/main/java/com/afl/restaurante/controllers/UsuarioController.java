@@ -1,4 +1,5 @@
 package com.afl.restaurante.controllers;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -6,12 +7,14 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.Temporal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -79,6 +82,8 @@ public class UsuarioController {
     @Autowired
     private EmailService emailService;
     
+	@Value("${app.timeActivacionMins:48}")
+	private int timerActivacion; 
 	
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public void messageNotReadableException(
@@ -117,19 +122,11 @@ public class UsuarioController {
 				   return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 			}
 			
-			LocalDate currentDate = LocalDate.now();
-		    LocalTime currentTime = LocalTime.now();
-			usuario.setFechaRegistro(LocalDateTime.of(currentDate, currentTime));
-
+			usuario.setFechaRegistro(LocalDateTime.now());
 			usuario.setFinalizadaActivacion(false);
-			
 			usuario.setCodActivacion(usuario.getUsername() + UUID.randomUUID().toString());
-
 			usuario.setEnabled(true);
-//			Timestamp ts = new Timestamp(System.currentTimeMillis());
-//			long milisec = ts.getTime() - usuario.getFechaRegistro().getTime();
-//			System.out.println("milisec = " + milisec);
-			
+
 			usuarioNew = usuarioService.save(usuario);
 			String urlConfirmacion = request.getRequestURL().toString() + "/confirmacion";
             enviarEmailActivacion(usuario, urlConfirmacion, locale);
@@ -153,17 +150,166 @@ public class UsuarioController {
     	 return usuarioService.findAll();
     }
 	
+	@PutMapping("/usuario/resetpwd")
+	public ResponseEntity<?> sendCodigoResetPwd(
+			@RequestBody Usuario usuario, 
+			BindingResult result,
+			final Locale locale) throws MessagingException, IOException {
+
+		Usuario usuarioUpdated = null;
+		Usuario usuarioActual = null;
+		Map<String, Object> response = new HashMap<>();
+		
+//		if (result.hasErrors()) {
+//			List<String> errors = result.getFieldErrors().stream()
+//				.map(fielderror -> "El campo '"+ fielderror.getField() + "' " + fielderror.getDefaultMessage())
+//				.collect(Collectors.toList());
+//			response.put("errors", errors);
+//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+//		}
+
+		usuarioActual = usuarioService.findByUsername(usuario.getUsername());
+		if (usuarioActual == null) {
+			response.put("mensaje", "Imposible reset password, La cuenta no existe");
+			response.put("error", "la cuenta no existe");
+			log.debug("Error, " + (String) response.get("error")); 	
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+			
+     		//usuarioActual.setNombre(usuario.getNombre());
+			//usuarioActual.setApellidos(usuario.getApellidos());
+			//usuarioActual.setTelefono(usuario.getTelefono());
+			//usuarioActual.setEmail(usuario.getEmail());
+			//usuarioActual.setFechaRegistro(usuario.getFechaRegistro());
+			//usuarioActual.setCodActivacion(usuario.getCodActivacion());
+			//usuarioActual.setFinalizadaActivacion(usuario.isFinalizadaActivacion());
+
+			//LocalDate currentDate = LocalDate.now();
+		    //LocalTime currentTime = LocalTime.now();
+		    //usuarioActual.setFechaResetPwd(LocalDateTime.of(currentDate, currentTime));
+			usuarioActual.setFechaResetPwd(LocalDateTime.now());
+	        			
+			// usuarioActual.setCodResetPwd(usuario.getCodResetPwd());
+			Random rand = new Random();
+			int num = rand.nextInt(900000) + 100000; 
+			usuarioActual.setCodResetPwd(String.valueOf(num));
+
+			//usuarioActual.setEnabled(usuario.getEnabled());
+			//usuarioActual.setAceptaEmails(usuario.getAceptaEmails());
+						
+			usuarioUpdated = usuarioService.save(usuarioActual);
+			
+            enviarEmailResetPwd(usuarioUpdated, locale);
+			
+		} catch (DataAccessException e) {
+			response.put("mensaje", "error al actualizar el curso =".concat(usuario.getUsername()));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "actualizado el usuario =".concat(usuario.getUsername()));
+		response.put("usuario", usuarioUpdated);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/usuario/changepwd")
+	public ResponseEntity<?> changePwd(
+			@Valid @RequestBody Usuario usuario, 
+			BindingResult result,
+			final Locale locale, Temporal to) throws MessagingException, IOException {
+
+		Usuario usuarioUpdated = null;
+		Usuario usuarioActual = null;
+		Map<String, Object> response = new HashMap<>();
+		
+		if (result.hasErrors()) {
+			List<String> errors = result.getFieldErrors().stream()
+				.map(fielderror -> "El campo '"+ fielderror.getField() + "' " + fielderror.getDefaultMessage())
+				.collect(Collectors.toList());
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		usuarioActual = usuarioService.findByUsername(usuario.getUsername());
+		if (usuarioActual == null) {
+			response.put("mensaje", "Imposible reset password, La cuenta no existe");
+			response.put("error", "la cuenta no existe");
+			log.debug("Error, " + (String) response.get("error")); 	
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		};
+		
+		
+		LocalDateTime now = LocalDateTime.now();
+		Duration duration = Duration.between(usuarioActual.getFechaResetPwd() /*from*/, now  /*to */);
+		if (duration.toMinutes() > timerActivacion) {
+			response.put("mensaje", "No ha sido posible finalizar el reset de password");
+			response.put("error", "solicitud de reset de password fuera de plazo, usuario :" + usuario.getUsername());
+			log.info("Error, " + (String) response.get("error"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		if (!usuario.getCodResetPwd().equals(usuarioActual.getCodResetPwd())) {
+			response.put("mensaje", "No es posible establcer password debido a que el código para reset es invalido");
+			response.put("error", "código de activación invalido");
+			log.debug("Error, " + (String) response.get("error")); 	
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		};
+		
+		try {
+			
+     		//usuarioActual.setNombre(usuario.getNombre());
+			//usuarioActual.setApellidos(usuario.getApellidos());
+			//usuarioActual.setTelefono(usuario.getTelefono());
+			//usuarioActual.setEmail(usuario.getEmail());
+			//usuarioActual.setFechaRegistro(usuario.getFechaRegistro());
+			//usuarioActual.setCodActivacion(usuario.getCodActivacion());
+			//usuarioActual.setFinalizadaActivacion(usuario.isFinalizadaActivacion());
+			// usuarioActual.setFechaResetPwd(usuario.getFechaResetPwd());
+     		// usuarioActual.setCodResetPwd(usuario.getCodResetPwd());
+			//usuarioActual.setEnabled(usuario.getEnabled());
+			//usuarioActual.setAceptaEmails(usuario.getAceptaEmails());
+			
+			
+            usuarioActual.setPassword(usuario.getPassword());			
+			usuarioUpdated = usuarioService.save(usuarioActual);
+			
+            enviarEmailResetPwd(usuarioUpdated, locale);
+			
+		} catch (DataAccessException e) {
+			response.put("mensaje", "error en reset de password =".concat(usuario.getUsername()));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "realizado con éxito el reset de password, usuario =".concat(usuario.getUsername()));
+		response.put("usuario", usuarioUpdated);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+
+
 	public void enviarEmailActivacion(Usuario user, String url, Locale locale) throws MessagingException, IOException {
 		
 		String recipientEmail = user.getUsername();
 		String recipientName = user.getNombre();
         String urlActivacion = url + "?token=" + user.getCodActivacion();
         
-        String body = this.emailService.getEditableMailTemplate();
+        String body = this.emailService.getMailActivacionCuentaTemplate();
 
-        this.emailService.sendEditableMail(
+        this.emailService.sendMailActivacionCuenta(
             recipientName, recipientEmail, body, urlActivacion, locale);
 
 	}
+	
+	public void enviarEmailResetPwd(Usuario user, Locale locale) throws MessagingException, IOException {
+		
+		String recipientEmail = user.getUsername();
+		String recipientName = user.getNombre();
+        
+        String body = this.emailService.getMailResetPwdTemplate();
 
+        this.emailService.sendMailResetPwd(
+            recipientName, recipientEmail, body, user.getCodResetPwd(), String.valueOf(timerActivacion), locale);
+
+	}
+	
 }

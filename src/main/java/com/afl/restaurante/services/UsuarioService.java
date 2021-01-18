@@ -3,6 +3,7 @@ package com.afl.restaurante.services;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ import com.afl.restaurante.entities.Usuario;
 @Service
 public class UsuarioService implements UserDetailsService, IUsuarioService {
 
-	private Logger logger = LoggerFactory.getLogger(UsuarioService.class);
+	private Logger log = LoggerFactory.getLogger(UsuarioService.class);
 	
 	@Autowired
 	private IUsuarioDao usuarioDao;
@@ -35,14 +36,14 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		
 		Usuario usuario = usuarioDao.findByUsername (username);
 		if (usuario == null) {
-			logger.info ("error no existe el usuario '" + username + "' en el sistema");
+			log.info ("error no existe el usuario '" + username + "' en el sistema");
 			throw new UsernameNotFoundException("error no existe el usuario '" + username + "' en el sistema");
 		}
 		
 		List<GrantedAuthority> authorities = usuario.getRoles()
 				.stream()
 				.map(role -> new SimpleGrantedAuthority(role.getNombre()))
-				.peek(authority -> logger.info("Role:" + authority.getAuthority()))
+				.peek(authority -> log.info("Role:" + authority.getAuthority()))
 				.collect(Collectors.toList());
 		
 		// Lo mismo que:
@@ -91,8 +92,8 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 	public boolean activarUsuario(String token) {
 		boolean activado = false;
 		Usuario usuario = usuarioDao.findByCodActivacion(token);
-		logger.info("activando usuario");
-		logger.debug(usuario.getFechaRegistro().toString());
+		log.info("activando usuario");
+		log.debug(usuario.getFechaRegistro().toString());
 		return activado;
 	}
 

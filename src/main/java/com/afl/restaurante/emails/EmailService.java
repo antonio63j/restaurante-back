@@ -57,7 +57,9 @@ public class EmailService {
     private static final String EMAIL_SIMPLE_TEMPLATE_NAME = "html/email-simple";
     private static final String EMAIL_WITHATTACHMENT_TEMPLATE_NAME = "html/email-withattachment";
     private static final String EMAIL_INLINEIMAGE_TEMPLATE_NAME = "html/email-inlineimage";
-    private static final String EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES = "classpath:mail/editablehtml/email-editable.html";
+    
+    private static final String EMAIL_ACTIVACION_CUENTA_TEMPLATE_CLASSPATH_RES = "classpath:mail/editablehtml/email-activacion-cuenta.html";
+    private static final String EMAIL_RESET_PWD_TEMPLATE_CLASSPATH_RES = "classpath:mail/editablehtml/email-reset-pwd.html";
 
     private static final String BACKGROUND_IMAGE = "mail/editablehtml/images/background.png";
     private static final String LOGO_BACKGROUND_IMAGE = "mail/editablehtml/images/logo-background.png";
@@ -224,8 +226,8 @@ public class EmailService {
     /* 
      * Send HTML mail with inline image
      */
-    public String getEditableMailTemplate() throws IOException {
-        final Resource templateResource = this.applicationContext.getResource(EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES);
+    public String getMailActivacionCuentaTemplate() throws IOException {
+        final Resource templateResource = this.applicationContext.getResource(EMAIL_ACTIVACION_CUENTA_TEMPLATE_CLASSPATH_RES);
         final InputStream inputStream = templateResource.getInputStream();
         return IOUtils.toString(inputStream, SpringMailConfig.EMAIL_TEMPLATE_ENCODING);
     }
@@ -234,7 +236,7 @@ public class EmailService {
     /*
      * Send HTML mail with inline image
      */
-    public void sendEditableMail(
+    public void sendMailActivacionCuenta(
             final String recipientName, 
             final String recipientEmail, 
             final String htmlContent,
@@ -271,5 +273,56 @@ public class EmailService {
         // Send mail
         this.mailSender.send(mimeMessage);
     }
+    
+    public String getMailResetPwdTemplate() throws IOException {
+        final Resource templateResource = this.applicationContext.getResource(EMAIL_RESET_PWD_TEMPLATE_CLASSPATH_RES);
+        final InputStream inputStream = templateResource.getInputStream();
+        return IOUtils.toString(inputStream, SpringMailConfig.EMAIL_TEMPLATE_ENCODING);
+    }
+
+
+    /*
+     * Send HTML mail with inline image
+     */
+    public void sendMailResetPwd(
+            final String recipientName, 
+            final String recipientEmail, 
+            final String htmlContent,
+            final String codigoResetPwd,
+            final String timerActivacion,
+            final Locale locale)
+            throws MessagingException {
+
+        // Prepare message using a Spring helper
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper message
+                = new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
+        message.setSubject("Códidgo para establecer nueva password en " + empresaStore.getNombre());
+        message.setFrom(from);
+        message.setTo(recipientEmail);
+
+        // Prepare the evaluation context
+        final Context ctx = new Context(locale);
+        ctx.setVariable("name", recipientName);
+        ctx.setVariable("codigo", codigoResetPwd);
+        ctx.setVariable("validez", timerActivacion);
+        ctx.setVariable("subscriptionDate", new Date());
+        ctx.setVariable("empresa", empresaStore.getNombre());
+        ctx.setVariable("hobbies", Arrays.asList("Calidad", "Servicio", "Precios"));
+
+        // Create the HTML body using Thymeleaf
+        final String output = stringTemplateEngine.process(htmlContent, ctx);
+        message.setText(output, true /* isHtml */);
+
+        // Add the inline images, referenced from the HTML code as "cid:image-name"
+        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
+        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
+        message.addInline("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
+        message.addInline("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
+
+        // Send mail
+        this.mailSender.send(mimeMessage);
+    }
+    
 
 }

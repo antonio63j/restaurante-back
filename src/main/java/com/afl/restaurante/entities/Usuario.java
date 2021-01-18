@@ -55,21 +55,24 @@ public class Usuario implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime fechaRegistro;
 	
-	@Temporal(TemporalType.DATE)
-	private Date fechaActivado;
-	
 	@Column(unique = true, length = 80)
 	private String codActivacion;
 	
 	private boolean finalizadaActivacion;
 	
-	@Temporal(TemporalType.DATE)
-	private Date fechaSolCambioPassw;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime fechaResetPwd;
 	
-	@Column(unique = true, length = 80)
-	private String codCambioPassw;
+	@Column(length = 6)
+	private String codResetPwd;
 	
-	private Boolean esperandoCambioPassw;
+//	@Temporal(TemporalType.DATE)
+//	private Date fechaSolCambioPassw;
+//	
+//	@Column(unique = true, length = 80)
+//	private String codCambioPassw;
+//	
+//	private Boolean esperandoCambioPassw;
 	private Boolean enabled;
 	private Boolean aceptaEmails;
 
@@ -99,44 +102,12 @@ public class Usuario implements Serializable {
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	public Date getFechaActivado() {
-		return fechaActivado;
-	}
-
-	public void setFechaActivado(Date fechaActivado) {
-		this.fechaActivado = fechaActivado;
-	}
-
 	public String getCodActivacion() {
 		return codActivacion;
 	}
 
 	public void setCodActivacion(String codActivacion) {
 		this.codActivacion = codActivacion;
-	}
-
-	public Date getFechaSolCambioPassw() {
-		return fechaSolCambioPassw;
-	}
-
-	public void setFechaSolCambioPassw(Date fechaSolCambioPassw) {
-		this.fechaSolCambioPassw = fechaSolCambioPassw;
-	}
-
-	public String getCodCambioPassw() {
-		return codCambioPassw;
-	}
-
-	public void setCodCambioPassw(String codCambioPassw) {
-		this.codCambioPassw = codCambioPassw;
-	}
-
-	public Boolean getEsperandoCambioPassw() {
-		return esperandoCambioPassw;
-	}
-
-	public void setEsperandoCambioPassw(Boolean esperandoCambioPassw) {
-		this.esperandoCambioPassw = esperandoCambioPassw;
 	}
 
 	public Boolean getAceptaEmails() {
@@ -220,15 +191,32 @@ public class Usuario implements Serializable {
 		this.finalizadaActivacion = finalizadaActivacion;
 	}
 
+	public String getCodResetPwd() {
+		return codResetPwd;
+	}
+
+	public void setCodResetPwd(String codResetPwd) {
+		this.codResetPwd = codResetPwd;
+	}
+	
+	public LocalDateTime getFechaResetPwd() {
+		return fechaResetPwd;
+	}
+
+	public void setFechaResetPwd(LocalDateTime fechaResetPwd) {
+		this.fechaResetPwd = fechaResetPwd;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", nombre=" + nombre
 				+ ", apellidos=" + apellidos + ", telefono=" + telefono + ", email=" + email + ", fechaRegistro="
-				+ fechaRegistro + ", fechaActivado=" + fechaActivado + ", codActivacion=" + codActivacion
-				+ ", fechaSolCambioPassw=" + fechaSolCambioPassw + ", codCambioPassw=" + codCambioPassw
-				+ ", esperandoCambioPassw=" + esperandoCambioPassw + ", enabled=" + enabled + ", aceptaEmails="
-				+ aceptaEmails + ", roles=" + roles + "]";
+				+ fechaRegistro + ", codActivacion=" + codActivacion + ", finalizadaActivacion=" + finalizadaActivacion
+				+ ", fechaRestPwd=" + fechaResetPwd + ", codResetPwd=" + codResetPwd + ", enabled=" + enabled
+				+ ", aceptaEmails=" + aceptaEmails + ", roles=" + roles + "]";
 	}
+
+
 
 	private static final long serialVersionUID = 1L;
 }

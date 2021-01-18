@@ -49,7 +49,7 @@ public class UsuarioControlerMvc {
 	@Autowired
 	private Empresa empresaStore;
 	
-	@Value("${app.timerActivacion:48}")
+	@Value("${app.timeActivacionMins:48}")
 	private int timerActivacion; 
 	
 //    @Autowired
@@ -79,8 +79,14 @@ public class UsuarioControlerMvc {
 			
      		LocalDateTime to = LocalDateTime.now();
 			
+//			Duration duration = Duration.between(usuario.getFechaRegistro() /*from*/,  to /*to */);
+//			if (duration.toHours() > timerActivacion) {
+//				log.info("Solicitud de activación fuera de plazo, el usuario " + usuario.getUsername() + " queda sin activar");
+//				return null;
+//			}
+			
 			Duration duration = Duration.between(usuario.getFechaRegistro() /*from*/,  to /*to */);
-			if (duration.toHours() > timerActivacion) {
+			if (duration.toMinutes() > timerActivacion) {
 				log.info("Solicitud de activación fuera de plazo, el usuario " + usuario.getUsername() + " queda sin activar");
 				return null;
 			}
@@ -98,7 +104,7 @@ public class UsuarioControlerMvc {
 		response.put("status", "ok");
 		log.debug(response.values().toString());
 		
-        model.addAttribute("messageKey", "message.accountVerified");
+        model.addAttribute("messageKey", usuario.getUsername());
         return new ModelAndView("redirect:/api/cuentaactivada", model);
 		// return modelAndView;
 		// return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
@@ -109,12 +115,13 @@ public class UsuarioControlerMvc {
 
         Locale locale = request.getLocale();
 
-        log.info("parametro de entrada messageKey = "+ messageKey);
+        log.info("parametro de entrada messageKey = "+ messageKey.toString());
         
-        String scheme = request.getScheme();
-        String serverName = request.getServerName();
-        int serverPort = request.getServerPort();
-        // String urlWeb = scheme + "://" + serverName +":"+ serverPort;
+//        String scheme = request.getScheme();
+//        String serverName = request.getServerName();
+//        int serverPort = request.getServerPort();
+//        String urlWeb = scheme + "://" + serverName +":"+ serverPort;
+        
         String urlWeb = empresaStore.getUrlWeb();
 
         model.addAttribute("name", "Antonio");
@@ -122,7 +129,23 @@ public class UsuarioControlerMvc {
         model.addAttribute("urlWeb", urlWeb);
         model.addAttribute("empresa", empresaStore.getNombre());
         
-//        messageKey.ifPresent( key -> {
+        if (!messageKey.isPresent()){
+        	model.addAttribute("resultado",  "Entre en la web y verifique la activación de su cuenta");
+        } else {
+        	String username = messageKey.get();
+        	Usuario usuario = usuarioService.findByUsername(username);
+			if (usuario != null) {
+				if (!usuario.isFinalizadaActivacion()) {
+					model.addAttribute("resultado",  "Activación no se realizó en plazo");
+				} else {
+					model.addAttribute("resultado",  "Tu cuenta ha sido activada, ya puedes entrar en la web con tu usuario y password");
+				}
+			} else {
+					model.addAttribute("resultado",  "Entre en la web y verifique la activación de su cuenta");
+			  }
+          };
+          
+ //        messageKey.ifPresent( key -> {
 //                    String message = messages.getMessage(key, null, locale);
 //                    model.addAttribute("message", message);
 //                }

@@ -38,6 +38,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/usuario/registro/confirmacion").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/usuarios").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/cuentaactivada").permitAll()
+				.antMatchers(HttpMethod.PUT, "/api/usuario/resetpwd").permitAll()
+				.antMatchers(HttpMethod.PUT, "/api/usuario/changepwd").permitAll()
 				
 				// .antMatchers(HttpMethod.GET, "/api/adminindex").hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/adminindex").permitAll()

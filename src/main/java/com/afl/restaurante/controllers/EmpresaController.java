@@ -120,6 +120,7 @@ public class EmpresaController {
 			empresaActual.setUrlWeb(empresa.getUrlWeb());
 			empresaActual.setDescripcionBreve(empresa.getDescripcionBreve());
 			empresaActual.setHorario(empresa.getHorario());
+			empresaActual.setPortada(empresa.getPortada());
 			
 			empresaUpdated = empresaService.save(empresaActual);
 			setDatosEmpresa(empresaUpdated);

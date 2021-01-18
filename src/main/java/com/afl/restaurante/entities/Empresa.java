@@ -57,6 +57,9 @@ public class Empresa implements Serializable {
 	@Column(columnDefinition="TEXT")
 	private String descripcionBreve;
 	
+	@Column(columnDefinition="TEXT")
+	private String portada;
+	
 //	@JsonIgnoreProperties(value={"nombre", "hibernateLazyInitializer", "handler"}, allowSetters=true)
 //	@OneToMany(fetch=FetchType.LAZY, mappedBy="nombre", cascade=CascadeType.ALL)
 //	private List<Slider> sliders = new ArrayList<>();

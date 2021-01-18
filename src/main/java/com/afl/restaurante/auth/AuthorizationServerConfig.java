@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,8 +24,14 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
 
-	private Logger logger = LoggerFactory.getLogger(AuthorizationServerSecurityConfigurer.class);
+	private Logger log = LoggerFactory.getLogger(AuthorizationServerSecurityConfigurer.class);
 
+	@Value("${app.accessTokenValiditySeconds:3600}")
+	private int accessTokenValiditySeconds;
+	
+	@Value("${app.refreshTokenValiditySeconds:3600}")
+	private int refreshTokenValiditySeconds;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -51,10 +58,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.secret(passwordEncoder.encode("12345"))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(3600)
-		.refreshTokenValiditySeconds(3600);
-		
-		//logger.info(clients.inMemory().toString());
+		.accessTokenValiditySeconds(accessTokenValiditySeconds)
+		.refreshTokenValiditySeconds(refreshTokenValiditySeconds);
 	}
 
 	// autenticación y generacion del token
@@ -68,7 +73,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.tokenStore(tokenStore())
 		.accessTokenConverter(accesTokenConverter())
 		.tokenEnhancer(tokenEnhancerChain);
-		
 	}
 
 	@Bean

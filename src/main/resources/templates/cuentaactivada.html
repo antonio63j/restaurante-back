@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title data-th-remove="all">Template for HTML email (editable)</title>
+        <title data-th-remove="all">Notificación de cuenta confirmada</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
@@ -17,21 +17,14 @@
                         </div>
                     </div>
                     <div style="padding: 15px 15px 30px 15px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:1em; background-color: #fff; color:#333;">
-                        <p>Hello <b data-th-text="${name}">Peter</b>!, tu cuenta ha sido activada</p>
-                        <p>
-                            <b>Ya puedes entrar en la web con tu usuario y password:</b> 
-                        </p>
+                        <p>Hola <b data-th-text="${name}">Peter</b>:</p>
+                        
+                        <p>Resultado el proceso de activación: <b data-th-text="${resultado}">Resultado con éxito</b>.</p>
+
                         <a href="details.html" th:href="${urlWeb}"target="_blank">Entrar</a>                    
                         
                         <br />
-                        
-                        <p>No olvides ventajas:</p>
-                        <ul data-th-remove="all-but-first">
-                            <li data-th-each="hobby : ${hobbies}"
-                                data-th-text="${hobby}">Reading</li>
-                            <li>Writing</li>
-                            <li>Bowling</li>
-                        </ul>
+
                         <p> <br />
                             a
                             <span data-th-text="${#dates.format(fechaActivacion)}">28-12-2012</span><br />
