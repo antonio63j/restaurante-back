@@ -55,20 +55,50 @@ public class UploadFileServiceImpl implements IUploadFileService {
 	}
 	
 
+//	@Override
+//	public String copia(MultipartFile archivo) throws IOException {
+//
+//		String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace(" ", "");
+//		Path rutaArchivo = getPath(DIRECTORIO_UPLOAD, nombreArchivo);
+//		log.info("upload: " + rutaArchivo.toString());
+//		Files.copy(archivo.getInputStream(), rutaArchivo);
+//		return nombreArchivo;
+//	}
+	
 	@Override
-	public String copia(MultipartFile archivo) throws IOException {
+	public void copia(Path rutaArchivo, MultipartFile archivo, String nombreArchivo) throws IOException {
 
-		String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace(" ", "");
-		Path rutaArchivo = getPath(DIRECTORIO_UPLOAD, nombreArchivo);
 		log.info("upload: " + rutaArchivo.toString());
 		Files.copy(archivo.getInputStream(), rutaArchivo);
-		return nombreArchivo;
 	}
 
+//	@Override
+//	public boolean eliminar(String archivo) {
+//		if (archivo != null && archivo.length() > 0) {
+//			Path rutaFotoAnterior = getPath (DIRECTORIO_UPLOAD, archivo);
+//			File archivoFotoAnterior = rutaFotoAnterior.toFile();
+//			if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
+//				if (!archivoFotoAnterior.delete()) {
+//					log.debug (" Error al eliminar: " + rutaFotoAnterior.toString() );
+//					return false;
+//				}
+//			   else {
+//        		 return true;  
+//			   }
+//			}	
+//			else { 	
+//			  log.debug (" Error al eliminar fichero, no existe o no se puede leer: " + rutaFotoAnterior.toString() );
+//		  	  return false;
+//			}
+//		}
+//		log.debug (" Error al eliminar archivo, nombre de fichero invalido " + archivo);
+//		return false;
+//	}
+	
 	@Override
-	public boolean eliminar(String archivo) {
+	public boolean eliminar(String directorio, String archivo) {
 		if (archivo != null && archivo.length() > 0) {
-			Path rutaFotoAnterior = getPath (DIRECTORIO_UPLOAD, archivo);
+			Path rutaFotoAnterior = getPath (directorio, archivo);
 			File archivoFotoAnterior = rutaFotoAnterior.toFile();
 			if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
 				if (!archivoFotoAnterior.delete()) {

@@ -18,8 +18,10 @@ public interface IUploadFileService {
 
 	Resource cargar (String nombreImagen) throws MalformedURLException; 
 	Resource salidaFichero (Path path) throws MalformedURLException;
-	String copia (MultipartFile archivo) throws IOException;
-	boolean eliminar (String archivo);
+	// String copia (MultipartFile archivo) throws IOException;
+	void copia (Path path, MultipartFile archivo, String nombreArchivo) throws IOException;
+	// boolean eliminar (String archivo);
+	boolean eliminar(String directorio, String archivo);
 	Path getPath(String path, String archivo);
 	
 }

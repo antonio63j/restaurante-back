@@ -13,6 +13,11 @@ target/
 .springBeans
 .sts4-cache
 
+## ECLIPSE ##
+/target/
+/logs/
+/uploads/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -29,6 +34,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-### Mi App ###
-logs/

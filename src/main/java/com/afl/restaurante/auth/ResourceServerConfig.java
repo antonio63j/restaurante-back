@@ -24,15 +24,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/api/herramientas", "/api/herramientas/page/tipo","/api/herramientas/filtro").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/herramienta/update").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/herramientas").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/api/herramienta/{id}").permitAll()
-
-				.antMatchers(HttpMethod.GET, "/api/proyectos/page", "/api/proyectos/cliente", "/api/proyectos/filtro").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/proyecto/{id}").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/proyectos").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/api/proyecto/{id}").permitAll()
 
 				.antMatchers(HttpMethod.POST, "/api/usuario/registro").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/usuario/registro/confirmacion").permitAll()
@@ -44,35 +35,70 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				// .antMatchers(HttpMethod.GET, "/api/adminindex").hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/adminindex").permitAll()
 				
-				.antMatchers(HttpMethod.GET, "/api/empresa", "/api/empresa/uploads/img/**", "/images/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/empresa/sliders").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/empresa/slider", "/api/empresa/img/**").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/empresa/slider").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/empresa").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/empresa").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/empresa/uploads/img/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/empresa/uploads/img/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/empresa", "/api/empresa/sliders").permitAll()
+				
+//				.antMatchers(HttpMethod.DELETE,  "/api/tipo/{id}").permitAll()
+//				.antMatchers(HttpMethod.GET,  "/api/tipoplato/uploads/img/**").permitAll()
+//				.antMatchers(HttpMethod.POST, "/api/tipoplato").permitAll()
+//				.antMatchers(HttpMethod.PUT,  "/api/tipoplato/update").permitAll()
+//				.antMatchers(HttpMethod.GET,  "/api/tipoplato", "/api/tipoplato/list").permitAll()
+//				.antMatchers(HttpMethod.PUT,  "/api/tipoplato/**").permitAll()
+				// .antMatchers(HttpMethod.DELETE,  "/api/tipoplato/{id}").permitAll()
+				.antMatchers("/api/tipoplato/**").permitAll()
+
+//				.antMatchers(HttpMethod.GET, "/api/empresa", "/api/empresa/uploads/img/**", "/images/**").permitAll()
+//				.antMatchers(HttpMethod.GET, "/api/empresa/uploads/img/admin/**").permitAll()
+//				.antMatchers(HttpMethod.GET, "/api/empresa/uploads/img/sliders/**").permitAll()
+//				.antMatchers(HttpMethod.POST, "/api/empresa/uploads/img/sliders", "/api/empresa/uploads/img/sliders/**").permitAll()
+//				.antMatchers(HttpMethod.GET, "/api/empresa/sliders").permitAll()
+//				.antMatchers(HttpMethod.POST, "/api/empresa/slider", "/api/empresa/img/**").permitAll()
+//				.antMatchers(HttpMethod.PUT, "/api/empresa/slider").permitAll()
+//				.antMatchers(HttpMethod.PUT, "/api/empresa").permitAll()
+//				.antMatchers(HttpMethod.POST, "/api/empresa").permitAll()
+				
+				/*
+				 * .antMatchers(HttpMethod.GET, "/api/herramientas",
+				 * "/api/herramientas/page/tipo","/api/herramientas/filtro").permitAll()
+				 * .antMatchers(HttpMethod.PUT, "/api/herramienta/update").permitAll()
+				 * .antMatchers(HttpMethod.POST, "/api/herramientas").permitAll()
+				 * .antMatchers(HttpMethod.DELETE, "/api/herramienta/{id}").permitAll()
+				 * 
+				 * .antMatchers(HttpMethod.GET, "/api/proyectos/page", "/api/proyectos/cliente",
+				 * "/api/proyectos/filtro").permitAll() .antMatchers(HttpMethod.PUT,
+				 * "/api/proyecto/{id}").permitAll() .antMatchers(HttpMethod.POST,
+				 * "/api/proyectos").permitAll() .antMatchers(HttpMethod.DELETE,
+				 * "/api/proyecto/{id}").permitAll()
+				 */
 				
 				/*
 				 * .antMatchers(HttpMethod.GET, "/api/cursos").hasAnyRole("USER", "ADMIN")
 				 * .antMatchers(HttpMethod.GET, "/api/cursos/page").hasRole("USER")
 				 * .antMatchers(HttpMethod.GET, "/api/cursos/filtro").hasRole("ADMIN")
 				 */
-
-				.antMatchers(HttpMethod.GET, "/api/cursos").permitAll().antMatchers(HttpMethod.GET, "/api/cursos/page")
-				.permitAll().antMatchers(HttpMethod.GET, "/api/cursos/filtro").permitAll()
-				.antMatchers(HttpMethod.POST, "/api/cursos").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/api/curso/{id}").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/curso/update").permitAll()
-
-				// pasamos validacion de acceso al controlador
-				.antMatchers(HttpMethod.GET, "/api/clientes/page").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/clientes/filtro").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/cliente/{id}").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/cliente/update").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/api/cliente/{id}").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/cliente/uploads/img/**").permitAll()
 				
-				.antMatchers(HttpMethod.GET, "/api/download/aflcv-pdf").permitAll()
+				/*
+				 * .antMatchers(HttpMethod.GET, "/api/cursos").permitAll()
+				 * .antMatchers(HttpMethod.GET, "/api/cursos/page").permitAll()
+				 * .antMatchers(HttpMethod.GET, "/api/cursos/filtro").permitAll()
+				 * .antMatchers(HttpMethod.POST, "/api/cursos").permitAll()
+				 * .antMatchers(HttpMethod.DELETE, "/api/curso/{id}").permitAll()
+				 * .antMatchers(HttpMethod.PUT, "/api/curso/update").permitAll()
+				 * 
+				 */				
 
+				/*
+				 * .antMatchers(HttpMethod.GET, "/api/clientes/page").permitAll()
+				 * .antMatchers(HttpMethod.GET, "/api/clientes/filtro").permitAll()
+				 * .antMatchers(HttpMethod.PUT, "/api/cliente/{id}").permitAll()
+				 * .antMatchers(HttpMethod.PUT, "/api/cliente/update").permitAll()
+				 * .antMatchers(HttpMethod.DELETE, "/api/cliente/{id}").permitAll()
+				 * .antMatchers(HttpMethod.GET, "/api/cliente/uploads/img/**").permitAll()
+				 * 
+				 * .antMatchers(HttpMethod.GET, "/api/download/aflcv-pdf").permitAll()
+				 */
+				
 				/*
 				 * Pasamos la seguridad a SpringSecurityConfig incorporando la
 				 * anotacion @EnableGlobalMethodSecurity y en el controlador, una anotación por
@@ -98,6 +124,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
+
 		return source;
 	}
 

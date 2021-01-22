@@ -1,5 +1,6 @@
 package com.afl.restaurante.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
@@ -7,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -123,7 +125,7 @@ public class EmpresaController {
 			empresaActual.setPortada(empresa.getPortada());
 			
 			empresaUpdated = empresaService.save(empresaActual);
-			setDatosEmpresa(empresaUpdated);
+			setDatosEmpresaStore(empresaUpdated);
 			
 		} catch (DataAccessException e) {
 			response.put("mensaje", "error al actualizar empresa con id=".concat(empresa.getId().toString()));
@@ -151,7 +153,7 @@ public class EmpresaController {
 
 		try {
 			empresaNew = empresaService.save(empresa);
-			setDatosEmpresa(empresaNew);
+			setDatosEmpresaStore(empresaNew);
 
 		} catch (DataAccessException e) {
 			response.put("mensaje", "error en el acceso a la base de datos, no ha sido posible crear la empresa");
@@ -197,7 +199,7 @@ public class EmpresaController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		response.put("mensaje", "slider creado");
-		response.put("slider", sliderNew);
+		response.put("data", sliderNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
@@ -224,6 +226,7 @@ public class EmpresaController {
 		}
 		try {
 			sliderActual.setLabel(slider.getLabel());
+			sliderActual.setDescripcion(slider.getDescripcion());
 			sliderUpdated = sliderService.save(sliderActual);
 
 		} catch (DataAccessException e) {
@@ -232,19 +235,24 @@ public class EmpresaController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		response.put("mensaje", "actualizado slider con id=".concat(slider.getId().toString()));
-		response.put("slider", sliderUpdated);
+		response.put("data", sliderUpdated);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 		
 	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/empresa/slider/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id) {
+	public ResponseEntity<?> deleteSlider(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 
 		try {
 			Slider slider = sliderService.findById(id);
+			if (slider == null) {
+				response.put("mensaje", "slider id=".concat(id.toString().concat(" no se encontró en la base de datos")));
+				response.put("error", "Ya no existe en la base de datos");
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
 			String nombreFoto = slider.getImgFileName();
-            uploadFileService.eliminar(nombreFoto);	  
+            uploadFileService.eliminar(uploadsDir + File.separator + "sliders", nombreFoto);	  
 			sliderService.deleteById(id);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "slider id=".concat(id.toString().concat(" error al eliminar en la base de datos")));
@@ -255,9 +263,47 @@ public class EmpresaController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
+//	@Secured({"ROLE_ADMIN"})
+//	@PostMapping("/empresa/uploads/img/sliders/")
+//	public ResponseEntity<?> uploadFoto(@RequestParam ("archivo") MultipartFile archivo, @RequestParam ("id") Long id) {
+//		
+//		Slider slider;
+//		Map<String, Object> response = new HashMap<>();
+//		
+//		log.debug ("id=" + id.toString());
+//		
+//		slider = sliderService.findById(id);
+//		if (slider == null) {
+//			response.put("mensaje",	"el slider con id=".concat(id.toString().concat(" no está en la base de datos")));
+//			response.put("error", "el slidere con id=".concat(id.toString().concat(" no está en la base de datos")));
+//			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+//		}
+//		
+//		if (!archivo.isEmpty()) {
+// 	    	String nombreArchivo = null;
+// 	    	try {
+// 	    		nombreArchivo = uploadFileService.copia(archivo);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+// 				response.put("mensaje",	"slider con id=".concat(id.toString().concat(" error al subir imagen")));
+//				response.put("error", "IOException");
+//	 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+//			}
+// 	    	
+// 	    	String nombreFotoAnterior = slider.getImgFileName();
+// 	    	uploadFileService.eliminar(nombreFotoAnterior);
+// 	    	
+// 	    	slider.setImgFileName(nombreArchivo);
+// 			sliderService.save(slider);
+// 			response.put("slider", slider);
+// 			response.put("mensaje", "slider id=".concat(id.toString().concat(" upload OK")));
+//		}
+//		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+//	}
+	
 	@Secured({"ROLE_ADMIN"})
-	@PostMapping("/empresa/uploads/img")
-	public ResponseEntity<?> uploadFoto(@RequestParam ("archivo") MultipartFile archivo, @RequestParam ("id") Long id) {
+	@PostMapping("/empresa/uploads/img/sliders")
+	public ResponseEntity<?> uploadFotoSlider(@RequestParam ("archivo") MultipartFile archivo, @RequestParam ("id") Long id) {
 		
 		Slider slider;
 		Map<String, Object> response = new HashMap<>();
@@ -271,10 +317,12 @@ public class EmpresaController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
+		String nombreArchivo = null;
 		if (!archivo.isEmpty()) {
- 	    	String nombreArchivo = null;
+			nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace(" ", "");
+    		Path rutaArchivo = uploadFileService.getPath(uploadsDir + File.separator + "sliders", nombreArchivo);
  	    	try {
- 	    		nombreArchivo = uploadFileService.copia(archivo);
+ 	    		 uploadFileService.copia(rutaArchivo, archivo, nombreArchivo);
 			} catch (IOException e) {
 				e.printStackTrace();
  				response.put("mensaje",	"slider con id=".concat(id.toString().concat(" error al subir imagen")));
@@ -283,27 +331,53 @@ public class EmpresaController {
 			}
  	    	
  	    	String nombreFotoAnterior = slider.getImgFileName();
- 	    	uploadFileService.eliminar(nombreFotoAnterior);
- 	    	
+ 	    	uploadFileService.eliminar(uploadsDir + File.separator + "sliders", nombreFotoAnterior);
  	    	slider.setImgFileName(nombreArchivo);
  			sliderService.save(slider);
- 			response.put("slider", slider);
+ 			response.put("data", slider);
  			response.put("mensaje", "slider id=".concat(id.toString().concat(" upload OK")));
 		}
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/empresa/uploads/img/{nombreFoto:.+}")
-	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
-
+	/*
+	 * @GetMapping("/empresa/uploads/img/{nombreFoto:.+}") public
+	 * ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
+	 * 
+	 * Resource resource = null; try { // Path path =
+	 * comentario Paths.get(uploadsDir+"/imagenes").resolve(nombreFoto).toAbsolutePath(); Path
+	 * path = Paths.get(uploadsDir).resolve(nombreFoto).toAbsolutePath();
+	 * 
+	 * log.debug("path:"); log.debug(path.toString());
+	 * 
+	 * resource = uploadFileService.salidaFichero(path); } catch
+	 * (MalformedURLException e) { e.printStackTrace(); }
+	 * 
+	 * HttpHeaders cabecera = new HttpHeaders();
+	 * cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+	 * resource.getFilename() + "\""); return new ResponseEntity<Resource>(resource,
+	 * cabecera, HttpStatus.OK); }
+	 */
+	
+   	@GetMapping("/empresa/uploads/img/admin/{nombreFoto:.+}")
+	public ResponseEntity<Resource> verFotoAdmin(@PathVariable String nombreFoto) {
+        return verFotoGenerico (Paths.get(uploadsDir + "/admin").resolve(nombreFoto).toAbsolutePath());
+        
+	}
+	
+   	@GetMapping("/empresa/uploads/img/sliders/{nombreFoto:.+}")
+	public ResponseEntity<Resource> verFotoSliders(@PathVariable String nombreFoto) {
+        return verFotoGenerico (Paths.get(uploadsDir + "/sliders").resolve(nombreFoto).toAbsolutePath());
+        
+	}
+		
+	//      Auxiliares
+	
+	private ResponseEntity<Resource> verFotoGenerico (Path path) {
 		Resource resource = null;
 		try {
-//			Path path = Paths.get(uploadsDir+"/imagenes").resolve(nombreFoto).toAbsolutePath();
-			Path path = Paths.get(uploadsDir).resolve(nombreFoto).toAbsolutePath();
-
 			log.debug("path:");
 			log.debug(path.toString());
-			
 			resource = uploadFileService.salidaFichero(path);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -312,13 +386,11 @@ public class EmpresaController {
 		HttpHeaders cabecera = new HttpHeaders();
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
 		return new ResponseEntity<Resource>(resource, cabecera, HttpStatus.OK);
+
 	}
 	
 	
-	
-	//      Auxiliares
-	
-	private void setDatosEmpresa (Empresa empresa) {
+	private void setDatosEmpresaStore (Empresa empresa) {
 		empresaStore.setNombre(empresa.getNombre());
 		empresaStore.setDireccion(empresa.getDireccion());
 		empresaStore.setProvincia(empresa.getProvincia());

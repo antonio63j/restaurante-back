@@ -36,6 +36,8 @@
     
     <logger name="com.afl.restaurante" level="TRACE" /> 
     
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE" />
+    
     <!-- LOG everything at info level -->
     <root level="info">
         <appender-ref ref="RollingFile" />
