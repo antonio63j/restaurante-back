@@ -47,6 +47,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 //				.antMatchers(HttpMethod.PUT,  "/api/tipoplato/**").permitAll()
 				// .antMatchers(HttpMethod.DELETE,  "/api/tipoplato/{id}").permitAll()
 				.antMatchers("/api/tipoplato/**").permitAll()
+				
+				.antMatchers("/api/menu/**").permitAll()
+				.antMatchers("/api/sugerencia/**").permitAll()
+				.antMatchers("/api/menusugerencia/**").permitAll()
 
 //				.antMatchers(HttpMethod.GET, "/api/empresa", "/api/empresa/uploads/img/**", "/images/**").permitAll()
 //				.antMatchers(HttpMethod.GET, "/api/empresa/uploads/img/admin/**").permitAll()

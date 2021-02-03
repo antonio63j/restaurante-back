@@ -150,7 +150,7 @@ public class TipodatoController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 			}
 			String nombreFoto = tipoplato.getImgFileName();
-            uploadFileService.eliminar(uploadsDir + File.separator + "tipoplato", nombreFoto);	  
+            uploadFileService.eliminar(uploadsDir + File.separator + "tipoplatos", nombreFoto);	  
 			tipoplatoService.deleteById(id);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "tipoplato id=".concat(id.toString().concat(" error al eliminar en la base de datos")));
