@@ -27,6 +27,8 @@ public class Sugerencia implements Serializable {
     @Column(name = "label", unique= true)
 	private String label;
 
+	private String tipo;
+	
 	private String imgFileName;
 	
 	private String descripcion;

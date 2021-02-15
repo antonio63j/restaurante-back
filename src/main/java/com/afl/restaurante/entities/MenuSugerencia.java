@@ -31,10 +31,8 @@ public class MenuSugerencia implements Serializable {
     @JsonIgnore
     private Menu menu;
 
-    // @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sugerencia_id")
-    //@JsonIgnore
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sugerencia sugerencia;
 

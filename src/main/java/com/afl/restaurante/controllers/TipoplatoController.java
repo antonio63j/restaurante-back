@@ -49,9 +49,9 @@ import com.afl.restaurante.services.files.IUploadFileService;
 @RestController
 @RequestMapping("/api")
 
-public class TipodatoController {
+public class TipoplatoController {
 	
-	private Logger log = LoggerFactory.getLogger(TipodatoController.class);
+	private Logger log = LoggerFactory.getLogger(TipoplatoController.class);
 	
 	@Value("${app.uploadsDir:uploads}")
 	private String uploadsDir;
@@ -118,6 +118,7 @@ public class TipodatoController {
 		}
 		try {
 			tipoplatoActual.setNombre(tipoplato.getNombre());
+			tipoplatoActual.setLabel(tipoplato.getLabel());
 			tipoplatoActual.setDescripcion(tipoplato.getDescripcion());
 			
 			tipoplatoUpdated = tipoplatoService.save(tipoplatoActual);
@@ -195,11 +196,12 @@ public class TipodatoController {
  	    	tipoplato.setImgFileName(nombreArchivo);
  			tipoplatoService.save(tipoplato);
  			response.put("data", tipoplato);
- 			response.put("mensaje", "tipoplato id=".concat(id.toString().concat(" upload OK")));
+ 			response.put("mensaje", "tipoplato id=".concat(id.toString().concat(" upload img OK")));
 		}
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	// @Secured({"ROLE_ADMIN"})
    	@GetMapping("/tipoplato/uploads/img/{nombreFoto:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
         return verFotoGenerico (Paths.get(uploadsDir + "/tipoplatos").resolve(nombreFoto).toAbsolutePath());
