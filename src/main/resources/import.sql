@@ -12,7 +12,7 @@ INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('clasificación 
 INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('sugerencias', 'sugerencias.png', 'En este apartado se definen todos los platos, asignado precio y clasificación', 'admsugerencia')
 INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('menu', 'menu.png', 'En este apartado se definen los menus, con primeros, segundos platos y precio', 'admmenu')
 
-INSERT INTO empresa(descripcion_breve, direccion, email, horario, nombre, provincia, telefono, urlweb) VALUES ('descripcion breve', 'c/Cortubi n.22', '@info@fernandezlucena.es', 'horario de 9 a 22h','Cazuela Cortubí', 'Madrid', '627336511', 'http://localhost:4200')
+INSERT INTO empresa(descripcion_breve, direccion, email, horario, nombre, provincia, telefono, urlweb) VALUES ('descripcion breve', 'c/Cortubi n.22', 'info@fernandezlucena.es', 'horario de 9 a 22h','Cazuela Cortubí', 'Madrid', '627336511', 'http://localhost:4200')
 
 INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider1.jpg', 'labelx adsllla lllllaaa kkkkkfinal', 'descripcionx')
 INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider2.jpg', 'labelx lll jaajajajaja aaa y final', 'descripcionx')

@@ -39,8 +39,9 @@ public class MenuService implements IMenuService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+		menuDao.deleteById(id);
 
 	}
 	

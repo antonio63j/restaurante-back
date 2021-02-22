@@ -3,6 +3,7 @@ package com.afl.restaurante.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,11 +29,13 @@ public class MenuSugerencia implements Serializable {
     // @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
+    @NotNull
     @JsonIgnore
     private Menu menu;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sugerencia_id")
+    @NotNull
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sugerencia sugerencia;
 
