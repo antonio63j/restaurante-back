@@ -153,7 +153,7 @@ public class SugerenciaController {
 		}
 
 		try {
-			sugerencia.setImgFileName("no-photo");
+			sugerencia.setImgFileName("no-photo.png");
 			sugerenciaNew = sugerenciaService.save(sugerencia);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "error en el acceso a la base de datos, no ha sido posible persistir el objeto");

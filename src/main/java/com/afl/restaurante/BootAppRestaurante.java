@@ -18,6 +18,7 @@ public class BootAppRestaurante {
 	private Logger log = LoggerFactory.getLogger(UsuarioController.class);
 	
 	public static void main(String[] args) {
+
 		SpringApplication.run(BootAppRestaurante.class, args);
 	}
 	

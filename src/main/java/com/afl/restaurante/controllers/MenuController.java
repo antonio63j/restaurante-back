@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,6 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.afl.restaurante.entities.Cliente;
+import com.afl.restaurante.entities.EnumComponenteMenu;
 import com.afl.restaurante.entities.Menu;
 import com.afl.restaurante.entities.MenuSugerencia;
 import com.afl.restaurante.entities.Sugerencia;
@@ -95,7 +100,7 @@ public class MenuController {
 		}
 
 		try {
-			menu.setImgFileName("no-photo");
+			menu.setImgFileName("no-photo.png");
 			menuNew = menuService.save(menu);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "error en el acceso a la base de datos, no ha sido posible persistir el objeto");
@@ -108,17 +113,26 @@ public class MenuController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
+//	@Secured({"ROLE_ADMIN"})
 	@PostMapping("/menusugerencia/create")
 	public ResponseEntity<?> createMenuSugerencia(@RequestBody Menu menuAct,
 			@RequestParam(value = "sugerenciaId", required = true) Long sugerenciaId,
-			@RequestParam(value = "primerPlato", required = true) boolean primerPlato) {
+//			@RequestParam(value = "primerPlato", required = true) boolean primerPlato) {
+	    	@RequestParam(value = "componenteMenu", required = true) EnumComponenteMenu componenteMenu,
+	    	Authentication authentication, Principal principal) {
 
 		Map<String, Object> response = new HashMap<>();
 		Menu menuFinal;
 		try {
-			//Menu menu = menuService.findById(menuAct.getId());
+
+
+	        System.out.println(authentication.getName());
+	        System.out.println("-----------------");
+	        System.out.println(principal.getName());
+			
+			
 			Sugerencia sugerencia = sugerenciaService.findById(sugerenciaId);
-			MenuSugerencia menuSugerencia = new MenuSugerencia(menuAct, sugerencia, primerPlato);
+			MenuSugerencia menuSugerencia = new MenuSugerencia(menuAct, sugerencia, componenteMenu);
 			menuService.saveMenuSugerencia(menuSugerencia);
 			
 			menuFinal = menuService.findById(menuAct.getId());

@@ -26,21 +26,6 @@ public class UploadFileServiceImpl implements IUploadFileService {
 	private Logger log = LoggerFactory.getLogger(UploadFileServiceImpl.class);
 	
 	@Override
-	public Resource cargar(String nombreImagen) throws MalformedURLException {
-		Path path = getPath(DIRECTORIO_UPLOAD, nombreImagen);
-		log.info("upload: " + path.toString());
-		
-		Resource resource = null;
-		resource = new UrlResource(path.toUri());
-	    if(!resource.exists() || !resource.isReadable()) {
-	    	path = getPath("src/main/resources/static/images", "no-photo.png");
-			resource = new UrlResource(path.toUri());
-			log.error("Error, no se pudo cargar la imagen " + nombreImagen + " se sustituye por imagen anónima");
-	    };	
-		return resource;
-	}
-	
-	@Override
 	public Resource salidaFichero(Path path) throws MalformedURLException {
 		log.info("salida de fichero: " + path.toString());
 		

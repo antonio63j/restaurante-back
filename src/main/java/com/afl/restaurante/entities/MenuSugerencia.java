@@ -39,53 +39,17 @@ public class MenuSugerencia implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sugerencia sugerencia;
 
-    private boolean primerPlato;
-
-    public MenuSugerencia(Menu menu, Sugerencia sugerencia, boolean primerPlato) {
+    //private boolean primerPlato;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 7)
+    private EnumComponenteMenu componenteMenu;
+    
+    public MenuSugerencia(Menu menu, Sugerencia sugerencia, EnumComponenteMenu componenteMenu) {
     	this.menu = menu;
         this.sugerencia = sugerencia;
-        this.primerPlato = primerPlato;
+        // this.primerPlato = primerPlato;
+        this.componenteMenu = componenteMenu;
+        
     }
 
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((id == null) ? 0 : id.hashCode());
-//		result = prime * result + ((menu == null) ? 0 : menu.hashCode());
-//		result = prime * result + (primerPlato ? 1231 : 1237);
-//		result = prime * result + ((sugerencia == null) ? 0 : sugerencia.hashCode());
-//		return result;
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		MenuSugerencia other = (MenuSugerencia) obj;
-//		if (id == null) {
-//			if (other.id != null)
-//				return false;
-//		} else if (!id.equals(other.id))
-//			return false;
-//		if (menu == null) {
-//			if (other.menu != null)
-//				return false;
-//		} else if (!menu.equals(other.menu))
-//			return false;
-//		if (primerPlato != other.primerPlato)
-//			return false;
-//		if (sugerencia == null) {
-//			if (other.sugerencia != null)
-//				return false;
-//		} else if (!sugerencia.equals(other.sugerencia))
-//			return false;
-//		return true;
-//	}
-
-    
 }

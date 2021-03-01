@@ -14,9 +14,9 @@ INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('menu', 'menu.pn
 
 INSERT INTO empresa(descripcion_breve, direccion, email, horario, nombre, provincia, telefono, urlweb) VALUES ('descripcion breve', 'c/Cortubi n.22', 'info@fernandezlucena.es', 'horario de 9 a 22h','Cazuela Cortubí', 'Madrid', '627336511', 'http://localhost:4200')
 
-INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider1.jpg', 'labelx adsllla lllllaaa kkkkkfinal', 'descripcionx')
-INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider2.jpg', 'labelx lll jaajajajaja aaa y final', 'descripcionx')
-INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider3.jpg', 'labelx nnnnnnnnnnnnnnnnnnnnnnnnnnn', 'descripcion')
+INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider1.jpg', 'slider1', 'descripcionx')
+INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider2.jpg', 'slider2', 'descripcionx')
+INSERT INTO sliders ( img_file_name, label, descripcion) VALUES ('slider3.jpg', 'slider3', 'descripcion')
 
 INSERT INTO tipoplato ( img_file_name, nombre, label, descripcion) VALUES ('slider3.jpg', 'Sopas y verduras', 'Sopas y verduras', 'descripcion')
 INSERT INTO tipoplato ( img_file_name, nombre, label, descripcion) VALUES ('slider3.jpg', 'Pasta y arroz', 'Pasta y arroz', 'Arroces nacionales')
@@ -25,8 +25,8 @@ INSERT INTO tipoplato ( img_file_name, nombre, label, descripcion) VALUES ('slid
 INSERT INTO tipoplato ( img_file_name, nombre, label, descripcion) VALUES ('slider3.jpg', 'Pescados y mariscos', 'Pescados y mariscos', 'Legunbres nacionales')
 INSERT INTO tipoplato ( img_file_name, nombre, label, descripcion) VALUES ('slider3.jpg', 'Postres', 'Postres', 'Legunbres nacionales')
 
-INSERT INTO sugerencia ( img_file_name, label, tipo, precio, descripcion) VALUES ('slider3.jpg', 'helado choco', 'helados', 4, 'descripcion')
-INSERT INTO sugerencia ( img_file_name, label, tipo, precio, descripcion) VALUES ('slider3.jpg', 'helado fresa', 'helados', 5, 'descripcion')
+INSERT INTO sugerencia ( img_file_name, label, tipo, precio, descripcion) VALUES ('slider3.jpg', 'helado choco', 'Postres', 4, 'descripcion')
+INSERT INTO sugerencia ( img_file_name, label, tipo, precio, descripcion) VALUES ('slider3.jpg', 'helado fresa', 'Postres', 5, 'descripcion')
 INSERT INTO sugerencia ( img_file_name, label, tipo, precio, descripcion) VALUES ('slider3.jpg', 'carne con patatas1', 'Pescados y mariscos', 12, 'descripcion')
 INSERT INTO sugerencia ( img_file_name, label, tipo, precio, descripcion) VALUES ('slider3.jpg', 'carne con patatas2', 'Sopas y verduras', 12, 'descripcion')
 INSERT INTO sugerencia ( img_file_name, label, tipo, precio, descripcion) VALUES ('slider3.jpg', 'carne con patatas3', 'Sopas y verduras', 12, 'descripcion')

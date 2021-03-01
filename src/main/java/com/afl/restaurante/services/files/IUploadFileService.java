@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface IUploadFileService {
 
-	Resource cargar (String nombreImagen) throws MalformedURLException; 
 	Resource salidaFichero (Path path) throws MalformedURLException;
 	// String copia (MultipartFile archivo) throws IOException;
 	void copia (Path path, MultipartFile archivo, String nombreArchivo) throws IOException;

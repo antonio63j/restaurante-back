@@ -75,7 +75,7 @@ public class TipoplatoController {
 		}
 
 		try {
-			tipoplato.setImgFileName("no-photo");
+			tipoplato.setImgFileName("no-photo.png");
 			tipoplatoNew = tipoplatoService.save(tipoplato);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "error en el acceso a la base de datos, no ha sido posible crear el tipoplato");

@@ -190,7 +190,7 @@ public class EmpresaController {
 		}
 
 		try {
-			slider.setImgFileName("no-photo");
+			slider.setImgFileName("no-photo.png");
 			sliderNew = sliderService.save(slider);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "error en el acceso a la base de datos, no ha sido posible crear el slider");
