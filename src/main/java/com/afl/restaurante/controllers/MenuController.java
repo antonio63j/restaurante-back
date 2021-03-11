@@ -155,6 +155,12 @@ public class MenuController {
 	public Set<Menu> findAllMenus() {
 		return menuService.findAllByLabel();
 	}
+	
+	@GetMapping("/menu/list-visible")
+	public Set<Menu> findAllMenusVisibles() {
+		return menuService.findAllByLabelVisible(new Boolean(true));
+	}
+	
 
 //		@Secured({"ROLE_ADMIN"})
 	@PutMapping("/menu/update")
@@ -175,22 +181,23 @@ public class MenuController {
 		menuActual = menuService.findById(menu.getId());
 		if (menuActual == null) {
 			response.put("mensaje",
-					"la tipoplato con id=".concat(menu.getId().toString().concat(" no está en la base de datos")));
+					"menu con id=".concat(menu.getId().toString().concat(" no está en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		try {
 			menuActual.setLabel(menu.getLabel());
 			menuActual.setDescripcion(menu.getDescripcion());
 			menuActual.setPrecio(menu.getPrecio());
+            menuActual.setVisible(menu.isVisible());
 
 			menuUpdated = menuService.save(menuActual);
 
 		} catch (DataAccessException e) {
-			response.put("mensaje", "error al actualizar tipoplato con id=".concat(menu.getId().toString()));
+			response.put("mensaje", "error al actualizar menu con id=".concat(menu.getId().toString()));
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		response.put("mensaje", "sin error al actualizar tipoplato con id=".concat(menu.getId().toString()));
+		response.put("mensaje", "sin error al actualizar menu con id=".concat(menu.getId().toString()));
 		response.put("data", menuUpdated);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}

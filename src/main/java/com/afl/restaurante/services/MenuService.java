@@ -27,6 +27,8 @@ public class MenuService implements IMenuService {
 		return menuDao.findAllByLabel();
 	}
 
+	
+	
 	@Override
 	public Menu findById(Long id) {
 		// TODO Auto-generated method stub
@@ -60,6 +62,13 @@ public class MenuService implements IMenuService {
 	public MenuSugerencia saveMenuSugerencia(MenuSugerencia menuSugerencia) {
 		
 		return menuSugerenciaDao.save(menuSugerencia);
+	}
+
+
+
+	@Override
+	public Set<Menu> findAllByLabelVisible(boolean visible) {
+		return menuDao.findByVisibleIsOrderByLabel(visible);
 	}
 
 }

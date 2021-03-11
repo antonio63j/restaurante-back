@@ -22,6 +22,7 @@ import java.util.stream.Stream;
 @NoArgsConstructor 
 @Getter 
 @Setter
+
 @Entity
 public class Menu implements Serializable {
 
@@ -37,7 +38,11 @@ public class Menu implements Serializable {
 
 	private String imgFileName;
 	
-    private String descripcion;
+	@NotNull
+	private boolean visible;
+	
+	@Column(columnDefinition="TEXT")
+	private String descripcion;
 	
 	@NotNull
 	@Column(name = "precio")
@@ -46,4 +51,6 @@ public class Menu implements Serializable {
     // @JsonIgnoreProperties(value={"menu", "hibernateLazyInitializer", "handler"}, allowSetters=true)
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<MenuSugerencia> menuSugerencias;
+
+
 }

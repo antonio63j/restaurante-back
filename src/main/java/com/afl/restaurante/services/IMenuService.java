@@ -10,6 +10,8 @@ public interface IMenuService {
 
 	public Set<Menu> findAllByLabel();
 	
+	public Set<Menu> findAllByLabelVisible(boolean visible);
+	
 	public Menu findById(Long id);
 	
 	public Menu save (Menu menu);

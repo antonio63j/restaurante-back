@@ -13,5 +13,7 @@ public interface IMenuDao extends JpaRepository<Menu, Long> {
 
     @Query ("select m from Menu m order by m.label asc")
     public Set<Menu> findAllByLabel();
-
+  
+	public Set<Menu> findByVisibleIsOrderByLabel(boolean b);
+	
 }
