@@ -99,7 +99,9 @@ public class SugerenciaController {
            	@RequestParam(value = "tipo", required = false) String tipo,
            	@RequestParam(value = "precioMin", required = false) String precioMin,
            	@RequestParam(value = "precioMax", required = false) String precioMax,
-           	@RequestParam(value = "descripcion", required = false) String descripcion)
+           	@RequestParam(value = "descripcion", required = false) String descripcion,
+           	@RequestParam(value = "visible", required = false) String visible
+           	)
 	
 	{
 
@@ -132,6 +134,10 @@ public class SugerenciaController {
         
         if (descripcion != null) {
             espec.add(new SearchCriteria("descripcion", descripcion, SearchOperation.MATCH));
+        }
+        
+        if (visible != null) {
+            espec.add(new SearchCriteria("visible", visible, SearchOperation.MATCH));
         }
         
         return sugerenciaService.findAll (espec, pageable);
@@ -219,6 +225,7 @@ public class SugerenciaController {
 			sugerenciaActual.setDescripcion(sugerencia.getDescripcion());
 			sugerenciaActual.setTipo(sugerencia.getTipo());
 			sugerenciaActual.setPrecio(sugerencia.getPrecio());
+            sugerenciaActual.setVisible(sugerencia.getVisible());
 
 			sugerenciaUpdated = sugerenciaService.save(sugerenciaActual);
 

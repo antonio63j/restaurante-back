@@ -51,6 +51,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.antMatchers("/api/menu/**").permitAll()
 				.antMatchers("/api/sugerencia/**").permitAll()
 				.antMatchers("/api/menusugerencia/**").permitAll()
+				.antMatchers("/api/pedido/**").permitAll()
 
 //				.antMatchers(HttpMethod.GET, "/api/empresa", "/api/empresa/uploads/img/**", "/images/**").permitAll()
 //				.antMatchers(HttpMethod.GET, "/api/empresa/uploads/img/admin/**").permitAll()

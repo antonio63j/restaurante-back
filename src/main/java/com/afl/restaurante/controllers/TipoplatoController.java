@@ -83,7 +83,7 @@ public class TipoplatoController {
 			log.error(response.toString());
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		response.put("mensaje", "Tipoplatocreado");
+		response.put("mensaje", "Tipoplato creado");
 		response.put("data", tipoplatoNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}

@@ -36,6 +36,7 @@ public class MenuService implements IMenuService {
 	}
 
 	@Override
+	@Transactional
 	public Menu save(Menu menu) {
 		return menuDao.save(menu);
 	}

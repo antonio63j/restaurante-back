@@ -23,7 +23,7 @@ public class Sugerencia implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@Size(min = 4, max=100, message="debe tener de 4 a 100 posiciones") 
+	@Size(min = 5, max=38, message="debe tener de 5 a 38 posiciones") 
     @Column(name = "label", unique= true)
 	private String label;
 
@@ -31,6 +31,11 @@ public class Sugerencia implements Serializable {
 	
 	private String imgFileName;
 	
+	// con null siempre presente en las consultas
+	@Size(min = 2, max=2, message="debe ser 'si' o 'no' ") 
+	private String visible;
+	
+	@Column(columnDefinition="TEXT")
 	private String descripcion;
 	
 	@NotNull
