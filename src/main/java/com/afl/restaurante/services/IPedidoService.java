@@ -15,4 +15,5 @@ public interface IPedidoService {
 	public void deleteById(Long id);
 	
 	public Set<Pedido> findByUsuarioEstadoCreacion(String usuario, EnumEstadoPedido estado);
+	
 }

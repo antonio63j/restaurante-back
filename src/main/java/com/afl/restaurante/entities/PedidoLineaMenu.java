@@ -23,6 +23,10 @@ import java.util.stream.Stream;
 @Setter
 
 @Entity
+
+//@Table(name="pedido_linea_menu", uniqueConstraints = {
+//	    @UniqueConstraint(columnNames = { "menu_id", "primero_id", "segundo_id", "postre_id", "pedido_id"  })
+//	})
 public class PedidoLineaMenu{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

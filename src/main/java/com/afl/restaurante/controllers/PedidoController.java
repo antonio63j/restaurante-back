@@ -193,6 +193,58 @@ public class PedidoController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
+	@DeleteMapping("/pedido/lineaSugerencia")
+	public ResponseEntity<?> deletePedidoSugerencia_2(
+			@RequestParam(value="idPedido", required = true) Long idPedido,
+			@RequestParam(value="idLineaSugerencia", required = true) Long idLineaSugerencia
+
+			) {
+		Map<String, Object> response = new HashMap<>();
+        Pedido carrito = null;
+		try {
+			carrito = pedidoLineaSugerenciaService.deleteLineaSugerenciaById(idPedido, idLineaSugerencia);
+		} catch (DataAccessException e) {
+			response.put("mensaje",
+					"sugerencia de pedido idLineaSugerencia=".concat(idLineaSugerencia.toString().concat(" error al eliminar en la base de datos")));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		if (carrito == null) {
+			return new ResponseEntity<Map<String, Object>>(HttpStatus.CREATED);
+		}
+		response.put("mensaje", "se ha eliminado la linea de sugerencia  con id=".concat(idLineaSugerencia.toString()));
+		response.put("data", carrito);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+		
+	}
+	
+	
+	@DeleteMapping("/pedido/lineaMenu")
+	public ResponseEntity<?> deletePedidoMenu_2(
+			@RequestParam(value="idPedido", required = true) Long idPedido,
+			@RequestParam(value="idLineaMenu", required = true) Long idLineaMenu) {
+		
+		Map<String, Object> response = new HashMap<>();
+        Pedido carrito = null;
+		try {
+			carrito = pedidoLineaMenuService.deleteLineaMenuId(idPedido, idLineaMenu);
+		} catch (DataAccessException e) {
+			response.put("mensaje",
+					"sugerencia de pedido idLineaMenu=".concat(idLineaMenu.toString().concat(" error al eliminar en la base de datos")));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		if (carrito == null) {
+			return new ResponseEntity<Map<String, Object>>(HttpStatus.CREATED);
+		}
+		response.put("mensaje", "se ha eliminado la linea menu con id=".concat(idLineaMenu.toString()));
+		response.put("data", carrito);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+		
+	}
+	
 	@DeleteMapping("/pedido/menu/{id}")
 	public ResponseEntity<?> deletePedidoMenu(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();

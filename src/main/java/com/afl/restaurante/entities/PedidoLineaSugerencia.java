@@ -19,6 +19,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Setter
 
 @Entity
+
+@Table(name="pedido_linea_sugerencia", uniqueConstraints = {
+	    @UniqueConstraint(columnNames = { "sugerencia_id", "pedido_id"  })
+	})
 public class PedidoLineaSugerencia{
 
     @Id
