@@ -44,7 +44,7 @@ public class PedidoLineaMenuService implements IPedidoLineaMenuService {
 			pedidoDao.deleteById(idPedido);
 			return null;
 		} else {
-			carrito.setCalculos();
+			// carrito.setCalculos();
 			return pedidoDao.saveAndFlush(carrito);
 		}
 	}

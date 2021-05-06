@@ -14,9 +14,11 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@NoArgsConstructor 
-@Getter 
-@Setter
+//@NoArgsConstructor 
+//@Getter 
+//@Setter
+
+@Data
 
 @Entity
 
@@ -32,7 +34,9 @@ public class PedidoLineaSugerencia{
     @NotNull
     private int cantidad;
     
-
+    @NotNull
+    private int precioInicio;
+    
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Sugerencia sugerencia;
@@ -45,7 +49,7 @@ public class PedidoLineaSugerencia{
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "pedido_id")
 //    private Pedido pedido;
-
+    
 	@Override
 	public String toString() {
 		return "PedidoLineaSugerencia [id=" + id + ", cantidad=" + cantidad + ", sugerencia=" + sugerencia + "]";

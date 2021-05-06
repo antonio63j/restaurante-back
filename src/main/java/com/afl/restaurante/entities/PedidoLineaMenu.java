@@ -32,7 +32,11 @@ public class PedidoLineaMenu{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @NotNull
     private int cantidad;
+    
+    @NotNull
+    private int precioInicio;
      
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
