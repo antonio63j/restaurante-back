@@ -70,7 +70,8 @@ public class Pedido implements Serializable {
 	@JoinColumn(name = "pedido_id")
     private Set<PedidoLineaSugerencia> pedidoLineaSugerencias;
 
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
+//	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch=FetchType.EAGER, cascade= {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
 	@JoinColumn(name = "pedido_id")
     private Set<PedidoLineaMenu> pedidoLineaMenus;
 	
@@ -88,6 +89,13 @@ public class Pedido implements Serializable {
 
 		return pedidoNew;
 	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", usuario=" + usuario + ", estadoPedido=" + estadoPedido + ", fechaRegistro="
+				+ fechaRegistro + ", fhRecogidaSolicitada=" + fhRecogidaSolicitada + ", nota=" + nota
+				+ ", pedidoLineaSugerencias=" + pedidoLineaSugerencias.toString() + ", pedidoLineaMenus=" + pedidoLineaMenus.toString() + "]";
+	}
 	
 //    @JsonGetter("usuario")
 //    public Long getTheName() {
@@ -95,12 +103,13 @@ public class Pedido implements Serializable {
 //    }
 //    
     
-	@Override
-	public String toString() {
-		return "Pedido [id=" + id + ", usuario=" + usuario + ", estadoPedido=" + estadoPedido
-				+ ", pedidoLineaSugerencias=" + pedidoLineaSugerencias.toString() + ", pedidoLineaMenus=" 
-				+ pedidoLineaMenus.toString() + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Pedido [id=" + id + ", usuario=" + usuario + ", estadoPedido=" + estadoPedido
+//				+ ", pedidoLineaSugerencias=" + pedidoLineaSugerencias.toString() + ", pedidoLineaMenus=" 
+//				+ pedidoLineaMenus.toString() + "]";
+//	}
+	
 	
 		
 //	public void setCalculos() {

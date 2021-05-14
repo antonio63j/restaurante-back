@@ -35,7 +35,7 @@ public class PedidoLineaSugerencia{
     private int cantidad;
     
     @NotNull
-    private int precioInicio;
+    private double precioInicio;
     
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -52,7 +52,7 @@ public class PedidoLineaSugerencia{
     
 	@Override
 	public String toString() {
-		return "PedidoLineaSugerencia [id=" + id + ", cantidad=" + cantidad + ", sugerencia=" + sugerencia + "]";
+		return "PedidoLineaSugerencia [id=" + id + ", cantidad=" + cantidad + ",precioInicio=" + precioInicio + ",sugerencia=" + sugerencia + "]";
 	}
     
     

@@ -3,19 +3,27 @@ package com.afl.restaurante.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,6 +31,7 @@ import lombok.Data;
 
 @Entity
 @Data
+
 @Table(name = "empresa")
 public class Empresa implements Serializable {
 
@@ -51,14 +60,24 @@ public class Empresa implements Serializable {
 	@Column (name = "email", length = 60)
 	private String email;
 	
-	@Column (name = "horario")
-	private String horario;
-	
 	@Column(columnDefinition="TEXT")
 	private String descripcionBreve;
 	
 	@Column(columnDefinition="TEXT")
 	private String portada;
+
+	@ElementCollection
+    private List<String> diasDescanso = new ArrayList<String>();
+	
+	@Column(name="hora_apertura", length = 5)
+	private String horaApertura;
+	
+	@Column(name="hora_cierre", length = 5)
+	private String horaCierre;
+	
+	private int horasMinPreparacionPedido;
+	
+	private int diasMaxRecogidaPedido;
 	
 //	@JsonIgnoreProperties(value={"nombre", "hibernateLazyInitializer", "handler"}, allowSetters=true)
 //	@OneToMany(fetch=FetchType.LAZY, mappedBy="nombre", cascade=CascadeType.ALL)

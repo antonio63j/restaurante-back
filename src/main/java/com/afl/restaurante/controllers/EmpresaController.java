@@ -121,10 +121,15 @@ public class EmpresaController {
 			empresaActual.setEmail(empresa.getEmail());
 			empresaActual.setUrlWeb(empresa.getUrlWeb());
 			empresaActual.setDescripcionBreve(empresa.getDescripcionBreve());
-			empresaActual.setHorario(empresa.getHorario());
 			empresaActual.setPortada(empresa.getPortada());
-			
+			empresaActual.setDiasDescanso(empresa.getDiasDescanso());
+			empresaActual.setHoraApertura(empresa.getHoraApertura());
+			empresaActual.setHoraCierre(empresa.getHoraCierre());
+			empresaActual.setHorasMinPreparacionPedido(empresa.getHorasMinPreparacionPedido());
+			empresaActual.setDiasMaxRecogidaPedido(empresa.getDiasMaxRecogidaPedido());
+						
 			empresaUpdated = empresaService.save(empresaActual);
+			
 			setDatosEmpresaStore(empresaUpdated);
 			
 		} catch (DataAccessException e) {
@@ -398,7 +403,6 @@ public class EmpresaController {
 		empresaStore.setEmail(empresa.getEmail());
 		empresaStore.setUrlWeb(empresa.getUrlWeb());
 		empresaStore.setDescripcionBreve(empresa.getDescripcionBreve());
-		empresaStore.setHorario(empresa.getHorario());
 		
 	}
 }
