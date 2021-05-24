@@ -11,6 +11,7 @@ INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('images de la p�
 INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('clasificación de platos', 'tipos.png', 'En este apartado se podrá clasificar los ditintos platos, por ejemplo añadir tipo carnes, pescados, ...', 'admtipoplato')
 INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('sugerencias', 'sugerencias.png', 'En este apartado se definen todos los platos, asignado precio y clasificación', 'admsugerencia')
 INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('menu', 'menu.png', 'En este apartado se definen los menus, con primeros, segundos platos y precio', 'admmenu')
+INSERT INTO adminindex ( cabecera, imagen, body, route) VALUES ('Contro pedidos', 'orders.png', 'Gestión y control sobre los pedidos', 'admpedido')
 
 INSERT INTO empresa(descripcion_breve, direccion, email, nombre, provincia, telefono, urlweb, hora_apertura, hora_cierre, horas_min_preparacion_pedido, dias_max_recogida_pedido) VALUES ('descripcion breve', 'c/Cortubi n.22', 'info@fernandezlucena.es', 'Cazuela Cortubí', 'Madrid', '627336511', 'http://localhost:4200', '09:00', '22:00', 2, 7)
 

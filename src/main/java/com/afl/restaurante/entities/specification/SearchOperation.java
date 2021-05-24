@@ -12,7 +12,10 @@ package com.afl.restaurante.entities.specification;
 	    MATCH_START,
 	    MATCH_END,
 	    IN,
-	    NOT_IN
+	    NOT_IN,
+	    
+	    DATE_LESS_THAN_EQUAL,
+	    DATE_GREATER_THAN_EQUALL
 	}
 
 

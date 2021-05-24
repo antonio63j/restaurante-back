@@ -17,15 +17,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.afl.restaurante.controllers.MenuController;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.afl.restaurante.formateadores.LocalDatetimeDeserializer;
+import com.afl.restaurante.formateadores.LocalDateTimeSerializer;
 
 
 //@NoArgsConstructor 
@@ -57,10 +63,12 @@ public class Pedido implements Serializable {
 //    private Double numArticulos;
     
 	@Column(columnDefinition = "TIMESTAMP")
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
 	private LocalDateTime fechaRegistro;
 
     @Column(columnDefinition = "TIMESTAMP")
-	private LocalDateTime fhRecogidaSolicitada;
+	private LocalDateTime fechaRecogida;
 
 	private String nota;
 	
@@ -82,7 +90,7 @@ public class Pedido implements Serializable {
 		pedidoNew.usuario = new String(usuario);
 		pedidoNew.estadoPedido = estadoPedido;
 		pedidoNew.fechaRegistro = LocalDateTime.from(fechaRegistro);
-		pedidoNew.fhRecogidaSolicitada = LocalDateTime.from(fhRecogidaSolicitada);
+		pedidoNew.fechaRecogida = LocalDateTime.from(fechaRecogida);
 		pedidoNew.nota = nota;
 		pedidoNew.pedidoLineaSugerencias = getPedidoLineaSugerencias().stream().collect(Collectors.toSet());
 		pedidoNew.pedidoLineaMenus = getPedidoLineaMenus().stream().collect(Collectors.toSet());
@@ -93,7 +101,7 @@ public class Pedido implements Serializable {
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", usuario=" + usuario + ", estadoPedido=" + estadoPedido + ", fechaRegistro="
-				+ fechaRegistro + ", fhRecogidaSolicitada=" + fhRecogidaSolicitada + ", nota=" + nota
+				+ fechaRegistro + ", fechaRecogida=" + fechaRecogida + ", nota=" + nota
 				+ ", pedidoLineaSugerencias=" + pedidoLineaSugerencias.toString() + ", pedidoLineaMenus=" + pedidoLineaMenus.toString() + "]";
 	}
 	

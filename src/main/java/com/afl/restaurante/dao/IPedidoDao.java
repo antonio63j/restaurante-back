@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.afl.restaurante.entities.EnumEstadoPedido;
 import com.afl.restaurante.entities.Pedido;
+import com.afl.restaurante.entities.Sugerencia;
 
 @Repository
-public interface IPedidoDao extends JpaRepository<Pedido, Long> {
+public interface IPedidoDao extends JpaRepository<Pedido, Long>, JpaSpecificationExecutor<Pedido> {
 
 //   @Query("from Pedido p where p.usuario = ?1 and p.estadoPedido in (?2) order by p.fechaRegistro desc")	
     @Query("from Pedido p where p.usuario = ?1 and p.estadoPedido in (?2)")	

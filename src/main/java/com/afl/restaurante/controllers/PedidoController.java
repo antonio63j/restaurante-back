@@ -6,8 +6,12 @@ import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -24,6 +28,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +48,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,10 +56,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.afl.restaurante.dao.IPedidoDao;
 import com.afl.restaurante.entities.EnumEstadoPedido;
 import com.afl.restaurante.entities.Pedido;
+import com.afl.restaurante.entities.Sugerencia;
+import com.afl.restaurante.entities.specification.GenericSpecification;
+import com.afl.restaurante.entities.specification.SearchCriteria;
+import com.afl.restaurante.entities.specification.SearchOperation;
+import com.afl.restaurante.entities.specification.SugerenciaSpecification;
 import com.afl.restaurante.services.IPedidoLineaMenuService;
 import com.afl.restaurante.services.IPedidoLineaSugerenciaService;
 import com.afl.restaurante.services.IPedidoService;
-import com.afl.restaurante.request.PedidoConfirmacion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @CrossOrigin(origins = { "http://localhost:4200", "*" })
@@ -75,8 +89,8 @@ public class PedidoController {
 		response.sendError(HttpStatus.NOT_IMPLEMENTED.value(), exception.getMessage());
 	}
 
-	@PostMapping("/pedido/save")
-	public ResponseEntity<?> savePedido(@Valid @RequestBody Pedido pedido, BindingResult result) {
+	@PostMapping("/carrito/save")
+	public ResponseEntity<?> saveCarrito(@Valid @RequestBody Pedido pedido, BindingResult result) {
 		Pedido pedidoNew = null;
 
 		Map<String, Object> response = new HashMap<>();
@@ -110,8 +124,8 @@ public class PedidoController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
-	@PostMapping("/pedido/confirmacion")
-	public ResponseEntity<?> confirmacionPedido(
+	@PostMapping("/carrito/confirmacion")
+	public ResponseEntity<?> confirmacionCarrito(
 			@Valid @RequestBody Pedido pedido, BindingResult result) {
 		
 		Pedido pedidoAct = null;
@@ -149,7 +163,7 @@ public class PedidoController {
 	}
 
 //		@Secured({"ROLE_ADMIN"})
-//	@PutMapping("/pedido/update")
+//	@PutMapping("/carrito/update")
 //	public ResponseEntity<?> update(@Valid @RequestBody Pedido pedido, BindingResult result) {
 //
 //		Pedido pedidoUpdated = null;
@@ -192,8 +206,8 @@ public class PedidoController {
 //		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 //	}
 
-	@DeleteMapping("/pedido/{id}")
-	public ResponseEntity<?> deletePedido(@PathVariable Long id) {
+	@DeleteMapping("/carrito/{id}")
+	public ResponseEntity<?> deleteCarrito(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 
 		try {
@@ -208,7 +222,7 @@ public class PedidoController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
-//	@DeleteMapping("/pedido/sugerencia/{id}")
+//	@DeleteMapping("/carrito/sugerencia/{id}")
 //	public ResponseEntity<?> deletePedidoSugerencia(@PathVariable Long id) {
 //		Map<String, Object> response = new HashMap<>();
 //
@@ -224,8 +238,8 @@ public class PedidoController {
 //		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 //	}
 
-	@DeleteMapping("/pedido/lineaSugerencia")
-	public ResponseEntity<?> deletePedidoSugerencia(@RequestParam(value = "idPedido", required = true) Long idPedido,
+	@DeleteMapping("/carrito/lineaSugerencia")
+	public ResponseEntity<?> deleteCarritoSugerencia(@RequestParam(value = "idPedido", required = true) Long idPedido,
 			@RequestParam(value = "idLineaSugerencia", required = true) Long idLineaSugerencia
 
 	) {
@@ -249,8 +263,8 @@ public class PedidoController {
 
 	}
 
-	@DeleteMapping("/pedido/lineaMenu")
-	public ResponseEntity<?> deletePedidoMenu(@RequestParam(value = "idPedido", required = true) Long idPedido,
+	@DeleteMapping("/carrito/lineaMenu")
+	public ResponseEntity<?> deleteCarritoMenu(@RequestParam(value = "idPedido", required = true) Long idPedido,
 			@RequestParam(value = "idLineaMenu", required = true) Long idLineaMenu) {
 
 		Map<String, Object> response = new HashMap<>();
@@ -273,7 +287,7 @@ public class PedidoController {
 
 	}
 
-//	@DeleteMapping("/pedido/menu/{id}")
+//	@DeleteMapping("/carrito/menu/{id}")
 //	public ResponseEntity<?> deletePedidoMenu(@PathVariable Long id) {
 //		Map<String, Object> response = new HashMap<>();
 //
@@ -289,7 +303,7 @@ public class PedidoController {
 //		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 //	}
 
-//	@GetMapping("/pedido/byid/{id}")
+//	@GetMapping("/carrito/byid/{id}")
 //	public ResponseEntity<?> getPedidoById (@PathVariable Long id) {
 //		Map<String, Object> response = new HashMap<>();
 //	    Pedido pedido;
@@ -316,8 +330,8 @@ public class PedidoController {
 //	}
 //	
 
-	@GetMapping("/pedido/usuario")
-	public ResponseEntity<?> getPedidoByUsuario(@RequestParam(value = "usuario", required = true) String usr) {
+	@GetMapping("/carrito/usuario")
+	public ResponseEntity<?> getCarritoByUsuario(@RequestParam(value = "usuario", required = true) String usr) {
 		Map<String, Object> response = new HashMap<>();
 		Set<Pedido> pedidos;
 		Pedido pedido;
@@ -348,10 +362,8 @@ public class PedidoController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
-	// @Valid @RequestBody PedidoConfirmacion pedidoConfirmacion, BindingResult
-	// result) {
 
-//	@GetMapping("/pedido/byid")
+//	@GetMapping("/carrito/byid")
 //	public ResponseEntity<?> getPedidoByIdNew (
 //			@Valid @RequestBody Pedido pedido, BindingResult result) {
 //		Map<String, Object> response = new HashMap<>();
@@ -376,5 +388,107 @@ public class PedidoController {
 //		response.put("data", pedido);
 //		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 //	}
+	
+	@RequestMapping(value = "/pedido/page", method = RequestMethod.GET)
+	public Page<Pedido> listPage(
+			@RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+			@RequestParam(value = "size", defaultValue = "12", required = false) Integer size,
+			@RequestParam(value = "order", defaultValue = "estadoPedido", required = false) String order,
+			@RequestParam(value = "direction", defaultValue = "desc", required = false) String direction,
+           	@RequestParam(value = "estado", required = false) String estado,
+            @RequestParam(value = "diaRegistroIni", required = false) String diaRegistroIni,
+            @RequestParam(value = "diaRegistroFin", required = false) String diaRegistroFin,
+           	
+//         	@RequestParam(value = "diaRegistroIni", required = false)  
+//		      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime diaRegistroIni,
+//           	
+//		   	@RequestParam(value = "diaRegistroFin", required = false)  
+//			   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime diaRegistroFin,
+
+           	@RequestParam(value = "diaRecogidaIni", required = false) String diaRecogidaIni,
+           	@RequestParam(value = "diaRecogidaFin", required = false) String diaRecogidaFin,
+           	@RequestParam(value = "usuario", required = false) String usuario
+
+           	)
+	
+	{
+
+		Pageable pageable;
+		
+		log.debug("estado:");
+		if (estado != null)
+			log.debug(estado);
+		
+		log.debug("f.registroIni:");
+		if (diaRegistroIni != null) {
+		  log.debug(diaRegistroIni.toString());
+		  System.out.println (diaRegistroIni);
+		}
+		
+		log.debug("f.registroFin:");
+		if (diaRegistroFin != null)
+		  log.debug(diaRegistroFin.toString());
+		
+		log.debug("f.recogidaIni:");
+		if (diaRecogidaIni != null)
+		  log.debug(diaRecogidaIni.toString());
+		
+		log.debug("f.recogidaFin:");
+		if (diaRecogidaFin != null)
+		  log.debug(diaRecogidaFin.toString());       
+		
+		
+		if (direction.equals("desc")) {
+			pageable = PageRequest.of(page, size, Sort.by(order).descending());
+		} else {
+			pageable = PageRequest.of(page, size, Sort.by(order).ascending());
+		}
+		
+        GenericSpecification<Pedido> espec = new GenericSpecification<Pedido>();
+
+        if (estado != null) {
+          EnumEstadoPedido enumEstado = EnumEstadoPedido.valueOf(estado.toUpperCase());
+	      espec.add(new SearchCriteria("estadoPedido", enumEstado, SearchOperation.EQUAL));
+        }
+        
+        if (diaRegistroIni != null) {
+        	LocalDateTime date = getLocalDateTime (diaRegistroIni);
+        	espec.add(new SearchCriteria("fechaRegistro", date, SearchOperation.DATE_GREATER_THAN_EQUALL));
+        }
+        
+        if (diaRegistroFin != null) {
+        	LocalDateTime date = getLocalDateTime (diaRegistroFin);
+        	espec.add(new SearchCriteria("fechaRegistro", date, SearchOperation.DATE_LESS_THAN_EQUAL));
+        }
+        
+        
+        if (diaRecogidaIni != null) {
+        	LocalDateTime date = getLocalDateTime (diaRecogidaIni);
+        	espec.add(new SearchCriteria("fechaRecogida", date, SearchOperation.DATE_GREATER_THAN_EQUALL));
+        }
+        
+        if (diaRecogidaFin != null) {
+        	LocalDateTime date = getLocalDateTime (diaRecogidaFin);
+        	espec.add(new SearchCriteria("fechaRecogida", date, SearchOperation.DATE_LESS_THAN_EQUAL));
+        }
+
+        
+        if (usuario != null) {
+            espec.add(new SearchCriteria("usuario", usuario, SearchOperation.MATCH));
+        }
+
+        
+        return pedidoService.findAll (espec, pageable);
+		
+	}
+	
+	private LocalDateTime getLocalDateTime(String strDateTime) {
+        Locale bLocale = new Locale.Builder().setLanguage("en").setRegion("ES").build();
+                                                       //          01234567890123456789012345678901234567890
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzzz", bLocale);
+    	String dh = strDateTime.replace("%2B", "+");
+    	LocalDateTime date = LocalDateTime.parse(dh, formatter);
+    	return date;
+	}
 
 }

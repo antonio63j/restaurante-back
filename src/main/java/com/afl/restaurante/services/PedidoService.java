@@ -11,6 +11,9 @@ import javax.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,7 @@ import com.afl.restaurante.entities.Herramienta;
 import com.afl.restaurante.entities.Pedido;
 import com.afl.restaurante.entities.PedidoLineaMenu;
 import com.afl.restaurante.entities.PedidoLineaSugerencia;
+import com.afl.restaurante.entities.Sugerencia;
 
 @Service
 public class PedidoService implements IPedidoService {
@@ -121,7 +125,13 @@ public class PedidoService implements IPedidoService {
 		return null;
 
 	}
-
+	
+	@Override
+	@Transactional (readOnly = true)
+	public Page<Pedido> findAll(Specification<Pedido> especification, Pageable pageable) {
+		return pedidoDao.findAll (especification, pageable);
+	}
+	
 
 	boolean preciosSinCambio(Pedido pedido) {
 
