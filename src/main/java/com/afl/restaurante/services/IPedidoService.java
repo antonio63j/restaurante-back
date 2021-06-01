@@ -17,7 +17,10 @@ public interface IPedidoService {
 
 	public Pedido findById(Long id);
 
+	// para carrito
 	public Pedido save(Pedido pedido);
+	
+	public Pedido savePedido (Pedido pedido);
 
 	public void deleteById(Long id);
 	

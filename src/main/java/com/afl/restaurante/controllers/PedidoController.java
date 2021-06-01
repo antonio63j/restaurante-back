@@ -55,6 +55,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.afl.restaurante.dao.IPedidoDao;
 import com.afl.restaurante.entities.EnumEstadoPedido;
+import com.afl.restaurante.entities.Menu;
 import com.afl.restaurante.entities.Pedido;
 import com.afl.restaurante.entities.Sugerencia;
 import com.afl.restaurante.entities.specification.GenericSpecification;
@@ -389,6 +390,54 @@ public class PedidoController {
 //		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 //	}
 	
+	@GetMapping("/pedido/{id}")
+	public ResponseEntity<?> getPedidoById (@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
+	    Pedido pedido;
+		try {
+			pedido = pedidoService.findById(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje",
+					"pedido id=".concat(id.toString().concat(" error acceso a la base de datos")));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "acceso satisfactorio a pedido con id=".concat(pedido.getId().toString()));
+		response.put("data", pedido);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/pedido/save")
+	public ResponseEntity<?> savePedido(@Valid @RequestBody Pedido pedido, BindingResult result) {
+		Pedido pedidoAct = null;
+		Pedido pedidoNew = null;
+
+		Map<String, Object> response = new HashMap<>();
+
+		if (result.hasErrors()) {
+			List<String> errors = result.getFieldErrors().stream()
+					.map(fielderror -> "El campo '" + fielderror.getField() + "' " + fielderror.getDefaultMessage())
+					.collect(Collectors.toList());
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		try {
+            pedidoAct = pedidoService.findById(pedido.getId());
+            pedidoAct.setEstadoPedido(pedido.getEstadoPedido());
+			pedidoNew = pedidoService.savePedido(pedidoAct);
+			
+		} catch (DataAccessException e) {
+			response.put("mensaje", "error en el acceso a la base de datos, no ha sido posible persistir el objeto");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			log.error(response.toString());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "modificado pedido");
+		response.put("data", pedidoNew);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
 	@RequestMapping(value = "/pedido/page", method = RequestMethod.GET)
 	public Page<Pedido> listPage(
 			@RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
@@ -398,45 +447,14 @@ public class PedidoController {
            	@RequestParam(value = "estado", required = false) String estado,
             @RequestParam(value = "diaRegistroIni", required = false) String diaRegistroIni,
             @RequestParam(value = "diaRegistroFin", required = false) String diaRegistroFin,
-           	
-//         	@RequestParam(value = "diaRegistroIni", required = false)  
-//		      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime diaRegistroIni,
-//           	
-//		   	@RequestParam(value = "diaRegistroFin", required = false)  
-//			   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime diaRegistroFin,
-
-           	@RequestParam(value = "diaRecogidaIni", required = false) String diaRecogidaIni,
+         	@RequestParam(value = "diaRecogidaIni", required = false) String diaRecogidaIni,
            	@RequestParam(value = "diaRecogidaFin", required = false) String diaRecogidaFin,
            	@RequestParam(value = "usuario", required = false) String usuario
-
            	)
 	
 	{
 
 		Pageable pageable;
-		
-		log.debug("estado:");
-		if (estado != null)
-			log.debug(estado);
-		
-		log.debug("f.registroIni:");
-		if (diaRegistroIni != null) {
-		  log.debug(diaRegistroIni.toString());
-		  System.out.println (diaRegistroIni);
-		}
-		
-		log.debug("f.registroFin:");
-		if (diaRegistroFin != null)
-		  log.debug(diaRegistroFin.toString());
-		
-		log.debug("f.recogidaIni:");
-		if (diaRecogidaIni != null)
-		  log.debug(diaRecogidaIni.toString());
-		
-		log.debug("f.recogidaFin:");
-		if (diaRecogidaFin != null)
-		  log.debug(diaRecogidaFin.toString());       
-		
 		
 		if (direction.equals("desc")) {
 			pageable = PageRequest.of(page, size, Sort.by(order).descending());
@@ -459,8 +477,7 @@ public class PedidoController {
         if (diaRegistroFin != null) {
         	LocalDateTime date = getLocalDateTime (diaRegistroFin);
         	espec.add(new SearchCriteria("fechaRegistro", date, SearchOperation.DATE_LESS_THAN_EQUAL));
-        }
-        
+        }       
         
         if (diaRecogidaIni != null) {
         	LocalDateTime date = getLocalDateTime (diaRecogidaIni);
@@ -471,12 +488,10 @@ public class PedidoController {
         	LocalDateTime date = getLocalDateTime (diaRecogidaFin);
         	espec.add(new SearchCriteria("fechaRecogida", date, SearchOperation.DATE_LESS_THAN_EQUAL));
         }
-
-        
+   
         if (usuario != null) {
             espec.add(new SearchCriteria("usuario", usuario, SearchOperation.MATCH));
         }
-
         
         return pedidoService.findAll (espec, pageable);
 		
@@ -485,9 +500,10 @@ public class PedidoController {
 	private LocalDateTime getLocalDateTime(String strDateTime) {
         Locale bLocale = new Locale.Builder().setLanguage("en").setRegion("ES").build();
                                                        //          01234567890123456789012345678901234567890
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzzz", bLocale);
-    	String dh = strDateTime.replace("%2B", "+");
-    	LocalDateTime date = LocalDateTime.parse(dh, formatter);
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzzz", bLocale);
+    	// String dh = strDateTime.replace("%2B", "+");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy H:m:s");
+        LocalDateTime date = LocalDateTime.parse(strDateTime, formatter);
     	return date;
 	}
 

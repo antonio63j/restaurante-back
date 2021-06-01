@@ -87,6 +87,12 @@ public class PedidoService implements IPedidoService {
 
 	@Override
 	@Transactional
+	public Pedido savePedido(Pedido pedido) {
+		return pedidoDao.save(pedido);
+	}
+	
+	@Override
+	@Transactional
 	public void deleteById(Long id) {
 		pedidoDao.deleteById(id);
 	}
