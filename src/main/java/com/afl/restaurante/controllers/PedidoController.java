@@ -37,6 +37,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -54,6 +55,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.afl.restaurante.dao.IPedidoDao;
+import com.afl.restaurante.entities.EnumEntregaPedido;
 import com.afl.restaurante.entities.EnumEstadoPedido;
 import com.afl.restaurante.entities.Menu;
 import com.afl.restaurante.entities.Pedido;
@@ -408,6 +410,7 @@ public class PedidoController {
 	}
 	
 	@PostMapping("/pedido/save")
+	@Secured({"ROLE_ADMIN"})
 	public ResponseEntity<?> savePedido(@Valid @RequestBody Pedido pedido, BindingResult result) {
 		Pedido pedidoAct = null;
 		Pedido pedidoNew = null;
@@ -447,8 +450,9 @@ public class PedidoController {
            	@RequestParam(value = "estado", required = false) String estado,
             @RequestParam(value = "diaRegistroIni", required = false) String diaRegistroIni,
             @RequestParam(value = "diaRegistroFin", required = false) String diaRegistroFin,
-         	@RequestParam(value = "diaRecogidaIni", required = false) String diaRecogidaIni,
-           	@RequestParam(value = "diaRecogidaFin", required = false) String diaRecogidaFin,
+         	@RequestParam(value = "diaEntregaIni", required = false) String diaEntregaIni,
+           	@RequestParam(value = "diaEntregaFin", required = false) String diaEntregaFin,
+           	@RequestParam(value = "entregaPedido", required = false) String entregaPedido,
            	@RequestParam(value = "usuario", required = false) String usuario
            	)
 	
@@ -479,16 +483,21 @@ public class PedidoController {
         	espec.add(new SearchCriteria("fechaRegistro", date, SearchOperation.DATE_LESS_THAN_EQUAL));
         }       
         
-        if (diaRecogidaIni != null) {
-        	LocalDateTime date = getLocalDateTime (diaRecogidaIni);
-        	espec.add(new SearchCriteria("fechaRecogida", date, SearchOperation.DATE_GREATER_THAN_EQUALL));
+        if (diaEntregaIni != null) {
+        	LocalDateTime date = getLocalDateTime (diaEntregaIni);
+        	espec.add(new SearchCriteria("fechaEntrega", date, SearchOperation.DATE_GREATER_THAN_EQUALL));
         }
         
-        if (diaRecogidaFin != null) {
-        	LocalDateTime date = getLocalDateTime (diaRecogidaFin);
-        	espec.add(new SearchCriteria("fechaRecogida", date, SearchOperation.DATE_LESS_THAN_EQUAL));
+        if (diaEntregaFin != null) {
+        	LocalDateTime date = getLocalDateTime (diaEntregaFin);
+        	espec.add(new SearchCriteria("fechaEntrega", date, SearchOperation.DATE_LESS_THAN_EQUAL));
         }
    
+        if (entregaPedido != null) {
+            EnumEntregaPedido enumEntregaPedido = EnumEntregaPedido.valueOf(entregaPedido.toUpperCase());
+  	        espec.add(new SearchCriteria("entregaPedido", enumEntregaPedido, SearchOperation.EQUAL));
+        }
+        
         if (usuario != null) {
             espec.add(new SearchCriteria("usuario", usuario, SearchOperation.MATCH));
         }

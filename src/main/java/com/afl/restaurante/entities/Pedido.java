@@ -53,6 +53,14 @@ public class Pedido implements Serializable {
     private String usuario;
     
     @Enumerated(EnumType.STRING)
+    @Column(length = 11)
+    private EnumEntregaPedido entregaPedido;
+    
+    @OneToOne
+    @JoinColumn(name="direccion_id")
+    private Direccion direccion;
+    
+    @Enumerated(EnumType.STRING)
     @Column(length = 10)
     private EnumEstadoPedido estadoPedido;
     
@@ -69,7 +77,7 @@ public class Pedido implements Serializable {
 
     @Column(columnDefinition = "TIMESTAMP")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="d/M/yyyy H:m:s")
-	private LocalDateTime fechaRecogida;
+	private LocalDateTime fechaEntrega;
 
 	private String nota;
 	
@@ -91,7 +99,7 @@ public class Pedido implements Serializable {
 		pedidoNew.usuario = new String(usuario);
 		pedidoNew.estadoPedido = estadoPedido;
 		pedidoNew.fechaRegistro = LocalDateTime.from(fechaRegistro);
-		pedidoNew.fechaRecogida = LocalDateTime.from(fechaRecogida);
+		pedidoNew.fechaEntrega = LocalDateTime.from(fechaEntrega);
 		pedidoNew.nota = nota;
 		pedidoNew.pedidoLineaSugerencias = getPedidoLineaSugerencias().stream().collect(Collectors.toSet());
 		pedidoNew.pedidoLineaMenus = getPedidoLineaMenus().stream().collect(Collectors.toSet());
@@ -102,7 +110,7 @@ public class Pedido implements Serializable {
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", usuario=" + usuario + ", estadoPedido=" + estadoPedido + ", fechaRegistro="
-				+ fechaRegistro + ", fechaRecogida=" + fechaRecogida + ", nota=" + nota
+				+ fechaRegistro + ", fechaEntrega=" + fechaEntrega + ", nota=" + nota
 				+ ", pedidoLineaSugerencias=" + pedidoLineaSugerencias.toString() + ", pedidoLineaMenus=" + pedidoLineaMenus.toString() + "]";
 	}
 	

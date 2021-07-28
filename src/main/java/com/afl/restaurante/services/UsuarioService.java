@@ -108,6 +108,12 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 	public boolean existsByUsername(String username) {
 		return usuarioDao.existsByUsername(username);
 	}
+
+	@Override
+	@Transactional (readOnly = true)
+	public Usuario findById(Long id) {
+		return usuarioDao.findById(id).orElse(null);
+	}
 	  
 
 }

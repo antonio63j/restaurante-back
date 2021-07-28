@@ -61,6 +61,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.afl.restaurante.emails.EmailService;
 import com.afl.restaurante.entities.Curso;
+import com.afl.restaurante.entities.Empresa;
 import com.afl.restaurante.entities.Proyecto;
 import com.afl.restaurante.entities.Usuario;
 import com.afl.restaurante.services.ICursoService;
@@ -127,9 +128,10 @@ public class UsuarioController {
 			usuario.setCodActivacion(usuario.getUsername() + UUID.randomUUID().toString());
 			usuario.setEnabled(true);
 
-			usuarioNew = usuarioService.save(usuario);
 			String urlConfirmacion = request.getRequestURL().toString() + "/confirmacion";
             enviarEmailActivacion(usuario, urlConfirmacion, locale);
+            
+			usuarioNew = usuarioService.save(usuario);
 			
 		} 
 		  catch (DataAccessException e) {
@@ -138,7 +140,15 @@ public class UsuarioController {
 			log.debug("Error en registro de usuario " + usuario.getEmail() + "," + (String) response.get("error")); 
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
+		  catch (MessagingException e) {
+			response.put("mensaje", "error en el envio email de activación");
+			response.put("error", e.getMessage().concat(e.getCause().toString()));
+			log.debug("Error en envio email " + usuario.getEmail() + "," + (String) response.get("error")); 
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
+		
 		response.put("mensaje", "usuario registrado");
 		response.put("usuario", usuarioNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
@@ -149,6 +159,12 @@ public class UsuarioController {
     public List<Usuario> findAll() {
     	 return usuarioService.findAll();
     }
+	
+	@RequestMapping(value = "/usuario", method = RequestMethod.GET)
+	public Usuario getUsuario(
+			@RequestParam(value = "cuenta"  , required = true) String cuenta) {
+		return usuarioService.findByUsername(cuenta);
+	}
 	
 	@PutMapping("/usuario/resetpwd")
 	public ResponseEntity<?> sendCodigoResetPwd(
@@ -203,7 +219,55 @@ public class UsuarioController {
             enviarEmailResetPwd(usuarioUpdated, locale);
 			
 		} catch (DataAccessException e) {
-			response.put("mensaje", "error al actualizar el curso =".concat(usuario.getUsername()));
+			response.put("mensaje", "error al actualizar datos de usuario=".concat(usuario.getUsername()));
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "actualizado el usuario =".concat(usuario.getUsername()));
+		response.put("usuario", usuarioUpdated);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/usuario/update")
+	public ResponseEntity<?> usuarioUpdate(
+			@RequestBody Usuario usuario, 
+			BindingResult result,
+			final Locale locale) throws MessagingException, IOException {
+
+		Usuario usuarioUpdated = null;
+		Usuario usuarioActual = null;
+		Map<String, Object> response = new HashMap<>();
+		
+		if (result.hasErrors()) {
+			List<String> errors = result.getFieldErrors().stream()
+				.map(fielderror -> "El campo '"+ fielderror.getField() + "' " + fielderror.getDefaultMessage())
+				.collect(Collectors.toList());
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		log.debug(usuario.toString());
+		
+		usuarioActual = usuarioService.findById(usuario.getId());
+		if (usuarioActual == null) {
+			response.put("mensaje", "Imposible reset password, La cuenta no existe");
+			response.put("error", "la cuenta no existe");
+			log.debug("Error, " + (String) response.get("error")); 	
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		try {
+			
+     		usuarioActual.setNombre(usuario.getNombre());
+			usuarioActual.setApellidos(usuario.getApellidos());
+			usuarioActual.setTelefono(usuario.getTelefono());
+			usuarioActual.setEmail(usuario.getEmail());
+			usuarioActual.setDirecciones(usuario.getDirecciones());
+			usuarioActual.setAceptaEmails(usuario.getAceptaEmails());
+			
+			usuarioUpdated = usuarioService.save(usuarioActual);
+			
+		} catch (DataAccessException e) {
+			response.put("mensaje", "error al actualizar datos de usuario=".concat(usuario.getUsername()));
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

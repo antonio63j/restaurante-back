@@ -84,7 +84,14 @@ public class Usuario implements Serializable {
 			  uniqueConstraints = @UniqueConstraint(columnNames={"usuario_id", "role_id"})
 			  )
 	private List<Role> roles;
-
+	
+	@ManyToMany (cascade= {CascadeType.ALL})
+	@JoinTable(
+			  name = "usuarios_direcciones", 
+			  joinColumns = @JoinColumn(name = "usuario_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "direccion_id")
+			  )
+	List<Direccion> direcciones;
 
 	public String getTelefono() {
 		return telefono;
@@ -183,6 +190,14 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 	
+	public List<Direccion> getDirecciones() {
+		return direcciones;
+	}
+
+	public void setDirecciones(List<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
+
 	public boolean isFinalizadaActivacion() {
 		return finalizadaActivacion;
 	}

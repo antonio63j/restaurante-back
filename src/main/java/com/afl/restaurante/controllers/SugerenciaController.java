@@ -35,6 +35,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -198,7 +199,7 @@ public class SugerenciaController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
-//	@Secured({"ROLE_ADMIN"})
+ 	@Secured({"ROLE_ADMIN"})
 	@PutMapping("/sugerencia/update")
 	public ResponseEntity<?> updateSugerencia(@Valid @RequestBody Sugerencia sugerencia, BindingResult result) {
 

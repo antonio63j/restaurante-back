@@ -5,6 +5,8 @@ import java.util.List;
 import com.afl.restaurante.entities.Usuario;
 
 public interface IUsuarioService {
+	
+	public Usuario findById (Long id);
 
 	public Usuario findByUsername (String username);
 	

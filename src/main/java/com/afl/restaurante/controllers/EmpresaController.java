@@ -126,7 +126,7 @@ public class EmpresaController {
 			empresaActual.setHoraApertura(empresa.getHoraApertura());
 			empresaActual.setHoraCierre(empresa.getHoraCierre());
 			empresaActual.setHorasMinPreparacionPedido(empresa.getHorasMinPreparacionPedido());
-			empresaActual.setDiasMaxRecogidaPedido(empresa.getDiasMaxRecogidaPedido());
+			empresaActual.setDiasMaxEntregaPedido(empresa.getDiasMaxEntregaPedido());
 						
 			empresaUpdated = empresaService.save(empresaActual);
 			

@@ -77,7 +77,7 @@ public class Empresa implements Serializable {
 	
 	private int horasMinPreparacionPedido;
 	
-	private int diasMaxRecogidaPedido;
+	private int diasMaxEntregaPedido;
 	
 //	@JsonIgnoreProperties(value={"nombre", "hibernateLazyInitializer", "handler"}, allowSetters=true)
 //	@OneToMany(fetch=FetchType.LAZY, mappedBy="nombre", cascade=CascadeType.ALL)
