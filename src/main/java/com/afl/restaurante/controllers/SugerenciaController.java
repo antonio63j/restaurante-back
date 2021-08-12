@@ -16,14 +16,18 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -33,6 +37,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.annotation.Secured;
@@ -48,12 +53,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.afl.restaurante.entities.Curso;
 import com.afl.restaurante.entities.Menu;
-import com.afl.restaurante.entities.Proyecto;
 import com.afl.restaurante.entities.Sugerencia;
 import com.afl.restaurante.entities.Tipoplato;
 import com.afl.restaurante.entities.specification.SearchCriteria;
@@ -67,6 +71,8 @@ import com.afl.restaurante.services.files.IUploadFileService;
 @RequestMapping("/api")
 
 public class SugerenciaController {
+
+
 
 	private Logger log = LoggerFactory.getLogger(SugerenciaController.class);
 
@@ -241,8 +247,12 @@ public class SugerenciaController {
 	}
 	
 	// @Secured({"ROLE_ADMIN"})
-	@PostMapping("/sugerencia/uploads/img")
-	public ResponseEntity<?> uploadFoto(@RequestParam ("archivo") MultipartFile archivo, @RequestParam ("id") Long id) {
+	// @PostMapping("/sugerencia/uploads/img")
+	@RequestMapping(path = "/sugerencia/uploads/img", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public ResponseEntity<?> uploadFoto(
+			@RequestParam ("id") Long id, 
+			@RequestPart ("archivo") MultipartFile archivo)
+	    {
 		
 		Sugerencia sugerencia;
 		Map<String, Object> response = new HashMap<>();

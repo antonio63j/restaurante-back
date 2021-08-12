@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.afl.restaurante.entities.Herramienta;
 import com.afl.restaurante.entities.Tipoplato;
 
 public interface ITipoplatoService {

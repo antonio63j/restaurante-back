@@ -63,12 +63,12 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter implements Applicat
     /*
      * Multipart resolver (needed for uploading attachments from web form)
      */
-    @Bean
-    public MultipartResolver multipartResolver() {
-        final CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(10485760); // 10MBytes
-        return multipartResolver;
-    }
+//    @Bean AFL es imnecesario además de dar problemas en la subido de ficheros
+//    public MultipartResolver multipartResolver() {
+//        final CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+//        multipartResolver.setMaxUploadSize(10485760); // 10MBytes
+//        return multipartResolver;
+//    }
 
 
 

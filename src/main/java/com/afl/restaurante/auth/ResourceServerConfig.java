@@ -54,6 +54,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.antMatchers("/api/carrito/**").permitAll()
 				.antMatchers("/api/pedido/**").permitAll()
 
+				.antMatchers(HttpMethod.GET, "/topic/**", "/wsocket1/**").permitAll()
+
+				
 //				.antMatchers(HttpMethod.GET, "/api/empresa", "/api/empresa/uploads/img/**", "/images/**").permitAll()
 //				.antMatchers(HttpMethod.GET, "/api/empresa/uploads/img/admin/**").permitAll()
 //				.antMatchers(HttpMethod.GET, "/api/empresa/uploads/img/sliders/**").permitAll()
@@ -123,7 +126,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://aflcv-front.web.app", "*"));
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:4321", "https://aflcv-front.web.app", "*"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));

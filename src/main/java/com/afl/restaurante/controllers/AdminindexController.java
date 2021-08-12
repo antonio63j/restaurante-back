@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.afl.restaurante.entities.Adminindex;
-import com.afl.restaurante.entities.Proyecto;
 import com.afl.restaurante.services.IAdminindexService;
-import com.afl.restaurante.services.IProyectoService;
 
 @CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController

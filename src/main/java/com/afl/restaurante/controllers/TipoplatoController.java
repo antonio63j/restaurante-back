@@ -38,7 +38,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.afl.restaurante.entities.Empresa;
-import com.afl.restaurante.entities.Herramienta;
 import com.afl.restaurante.entities.Slider;
 import com.afl.restaurante.entities.Tipoplato;
 import com.afl.restaurante.services.ITipoplatoService;

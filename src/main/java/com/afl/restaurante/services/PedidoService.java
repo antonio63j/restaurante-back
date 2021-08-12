@@ -22,7 +22,6 @@ import com.afl.restaurante.dao.IPedidoDao;
 import com.afl.restaurante.dao.IPedidoLineaMenuDao;
 import com.afl.restaurante.dao.IPedidoLineaSugerenciaDao;
 import com.afl.restaurante.entities.EnumEstadoPedido;
-import com.afl.restaurante.entities.Herramienta;
 import com.afl.restaurante.entities.Pedido;
 import com.afl.restaurante.entities.PedidoLineaMenu;
 import com.afl.restaurante.entities.PedidoLineaSugerencia;

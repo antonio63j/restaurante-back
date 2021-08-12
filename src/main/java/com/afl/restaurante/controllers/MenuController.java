@@ -48,7 +48,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.afl.restaurante.entities.Cliente;
 import com.afl.restaurante.entities.EnumComponenteMenu;
 import com.afl.restaurante.entities.Menu;
 import com.afl.restaurante.entities.MenuSugerencia;

@@ -60,11 +60,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.afl.restaurante.emails.EmailService;
-import com.afl.restaurante.entities.Curso;
 import com.afl.restaurante.entities.Empresa;
-import com.afl.restaurante.entities.Proyecto;
 import com.afl.restaurante.entities.Usuario;
-import com.afl.restaurante.services.ICursoService;
 import com.afl.restaurante.services.IUsuarioService;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;

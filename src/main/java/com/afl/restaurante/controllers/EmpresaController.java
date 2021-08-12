@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.validation.BindingResult;
@@ -46,8 +48,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.afl.restaurante.entities.Cliente;
-import com.afl.restaurante.entities.Curso;
 import com.afl.restaurante.entities.Empresa;
 import com.afl.restaurante.entities.Slider;
 import com.afl.restaurante.services.IEmpresaService;
@@ -60,7 +60,7 @@ import com.afl.restaurante.services.files.IUploadFileService;
 @RequestMapping("/api")
 
 public class EmpresaController {
-	private Logger log = LoggerFactory.getLogger(CursoController.class);
+	private Logger log = LoggerFactory.getLogger(EmpresaController.class);
 
 	@Value("${app.uploadsDir:uploads}")
 	private String uploadsDir;
@@ -76,6 +76,9 @@ public class EmpresaController {
 	
 	@Autowired
 	private IUploadFileService uploadFileService;
+	
+	@Autowired
+	private SimpMessagingTemplate template;
 	
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public void messageNotReadableException(
@@ -132,11 +135,15 @@ public class EmpresaController {
 			
 			setDatosEmpresaStore(empresaUpdated);
 			
+			template.convertAndSend("/topic/datosEmpresa", empresaUpdated);
+			
 		} catch (DataAccessException e) {
 			response.put("mensaje", "error al actualizar empresa con id=".concat(empresa.getId().toString()));
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
+		
 		response.put("mensaje", "sin error al actualizar empresa con id=".concat(empresa.getId().toString()));
 		response.put("empresa", empresaUpdated);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
