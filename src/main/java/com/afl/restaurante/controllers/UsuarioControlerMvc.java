@@ -124,9 +124,9 @@ public class UsuarioControlerMvc {
         
         String urlWeb = empresaStore.getUrlWeb();
 
-        model.addAttribute("name", "Antonio");
+        
         model.addAttribute("fechaActivacion", new Date());
-        model.addAttribute("urlWeb", urlWeb);
+        model.addAttribute("urlWeb", urlWeb + "/login");
         model.addAttribute("empresa", empresaStore.getNombre());
         
         if (!messageKey.isPresent()){
@@ -134,6 +134,7 @@ public class UsuarioControlerMvc {
         } else {
         	String username = messageKey.get();
         	Usuario usuario = usuarioService.findByUsername(username);
+        	model.addAttribute("name", usuario.getNombre());
 			if (usuario != null) {
 				if (!usuario.isFinalizadaActivacion()) {
 					model.addAttribute("resultado",  "Activación no se realizó en plazo");

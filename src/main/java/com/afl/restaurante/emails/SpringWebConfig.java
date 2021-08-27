@@ -42,13 +42,30 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter implements Applicat
     /*
      *  Dispatcher configuration for serving static resources
      */
+    
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        super.addResourceHandlers(registry);
-        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
-        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
-        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+//        super.addResourceHandlers(registry);
+        
+//        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+//        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+//        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+        
+       
+        registry.addResourceHandler(
+                "/webjars/**",
+                "/images/**",
+                "/css/**",
+                "/js/**")
+                .addResourceLocations(
+                        "classpath:/META-INF/resources/webjars/",
+                        "classpath:/static/images/",
+                        "classpath:/static/css/",
+                        "classpath:/static/js/");
     }
+        
+       
+       
 
     /*
      *  Message externalization/internationalization
@@ -89,31 +106,23 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter implements Applicat
         templateResolver.setTemplateMode(TemplateMode.HTML);
         // Template cache is true by default. Set to false if you want
         // templates to be automatically updated when modified.
-        templateResolver.setCacheable(true);
+        templateResolver.setCacheable(false);
         return templateResolver;
     }
-
-//    @Bean
-//    public SpringTemplateEngine templateEngine(){
-//        // SpringTemplateEngine automatically applies SpringStandardDialect and
-//        // enables Spring's own MessageSource message resolution mechanisms.
-//        final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//        templateEngine.setTemplateResolver(templateResolver());
-//        // Enabling the SpringEL compiler with Spring 4.2.4 or newer can
-//        // speed up execution in most scenarios, but might be incompatible
-//        // with specific cases when expressions in one template are reused
-//        // across different data types, so this flag is "false" by default
-//        // for safer backwards compatibility.
-//        templateEngine.setEnableSpringELCompiler(true);
-//        return templateEngine;
-//    }
-
-//    @Bean
-//    public ThymeleafViewResolver viewResolver(){
-//        final ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-//        viewResolver.setTemplateEngine(templateEngine());
-//        return viewResolver;
-//    }
-
-
+	
+	//  @Bean public SpringTemplateEngine templateEngine(){ 
+    //    // SpringTemplateEngine automatically applies SpringStandardDialect and 
+    //    // enables Spring's own MessageSource message resolution mechanisms. final SpringTemplateEngine
+	//    // SpringEL compiler with Spring 4.2.4 or newer can speed up execution in
+	//    // most scenarios, but might be incompatible with specific cases when
+	//    // expressions in one template are reused across different data types, so
+	//    // this flag is "false" by default for safer backwards compatibility.
+	//    templateEngine.setEnableSpringELCompiler(true); 
+    //    return templateEngine; }
+	  
+	//  @Bean public ThymeleafViewResolver viewResolver(){ final
+	//  ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+	//  viewResolver.setTemplateEngine(templateEngine()); return viewResolver; }
+	  
+	 
 }

@@ -62,6 +62,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.afl.restaurante.emails.EmailService;
 import com.afl.restaurante.entities.Empresa;
 import com.afl.restaurante.entities.Usuario;
+import com.afl.restaurante.modelos.EmailContactoCliente;
 import com.afl.restaurante.services.IUsuarioService;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -148,6 +149,41 @@ public class UsuarioController {
 		
 		response.put("mensaje", "usuario registrado");
 		response.put("usuario", usuarioNew);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/usuario/emailCliente")
+	public ResponseEntity<?> emailCliente(@Valid @RequestBody EmailContactoCliente emailContacto, 
+			                        BindingResult result, HttpServletRequest request,
+			                        final Locale locale) throws MessagingException, IOException {
+
+		Map<String, Object> response = new HashMap<>();
+
+
+
+		if (result.hasErrors()) {
+			List<String> errors = result.getFieldErrors().stream()
+					.map(fielderror -> "El campo '" + fielderror.getField() + "' " + fielderror.getDefaultMessage())
+					.collect(Collectors.toList());
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		try {
+            enviarEmailCliente(emailContacto, locale);
+            
+		} 
+		
+		  catch (MessagingException e) {
+			response.put("mensaje", "error en el envio email de contacto");
+			response.put("error", e.getMessage().concat(e.getCause().toString()));
+			log.debug("Error en envio email " + emailContacto.getEmail() + "," + (String) response.get("error")); 
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		
+		response.put("mensaje", "email enviado");
+		// response.put("usuario", emailContacto.getEmail());
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
@@ -359,6 +395,12 @@ public class UsuarioController {
         this.emailService.sendMailActivacionCuenta(
             recipientName, recipientEmail, body, urlActivacion, locale);
 
+	}
+	
+	public void enviarEmailCliente(EmailContactoCliente emailContactoCliente, Locale locale) throws MessagingException, IOException {
+        String body = this.emailService.getMailContactoClienteTemplate();
+        this.emailService.sendMailContactoCliente(
+        		emailContactoCliente, body, locale);
 	}
 	
 	public void enviarEmailResetPwd(Usuario user, Locale locale) throws MessagingException, IOException {

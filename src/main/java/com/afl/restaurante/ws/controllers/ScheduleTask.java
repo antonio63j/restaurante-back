@@ -32,7 +32,7 @@ public class ScheduleTask {
 		//template.convertAndSend("/topic/message", new SimpleDateFormat("HH:mm:ss").format(new Date()));
 		// template.convertAndSend("/topic/datosEmpresa", new Date());
 
-		System.out.println("hola");
+		// System.out.println("hola");
 	}
 
 }

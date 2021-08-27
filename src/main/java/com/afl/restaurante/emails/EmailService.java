@@ -46,6 +46,7 @@ import org.thymeleaf.context.Context;
 // import thymeleafexamples.springmail.business.SpringMailConfig;
 
 import com.afl.restaurante.entities.Empresa;
+import com.afl.restaurante.modelos.EmailContactoCliente;
 import com.afl.restaurante.services.IEmpresaService;
 
 @PropertySource("classpath:mail/emailconfig.properties")
@@ -60,6 +61,7 @@ public class EmailService {
     
     private static final String EMAIL_ACTIVACION_CUENTA_TEMPLATE_CLASSPATH_RES = "classpath:mail/editablehtml/email-activacion-cuenta.html";
     private static final String EMAIL_RESET_PWD_TEMPLATE_CLASSPATH_RES = "classpath:mail/editablehtml/email-reset-pwd.html";
+    private static final String EMAIL_CONTACTO_CLIENTE_TEMPLATE_CLASSPATH_RES = "classpath:mail/editablehtml/email-contacto-cliente.html";
 
     private static final String BACKGROUND_IMAGE = "mail/editablehtml/images/background.png";
     private static final String LOGO_BACKGROUND_IMAGE = "mail/editablehtml/images/logo-background.png";
@@ -323,6 +325,53 @@ public class EmailService {
         // Send mail
         this.mailSender.send(mimeMessage);
     }
+    
+    public String getMailContactoClienteTemplate() throws IOException {
+        final Resource templateResource = this.applicationContext.getResource(EMAIL_CONTACTO_CLIENTE_TEMPLATE_CLASSPATH_RES);
+        final InputStream inputStream = templateResource.getInputStream();
+        return IOUtils.toString(inputStream, SpringMailConfig.EMAIL_TEMPLATE_ENCODING);
+    }
+    
+    /*
+     * Send HTML mail with inline image
+     */
+    public void sendMailContactoCliente(
+    		final EmailContactoCliente emailContactoCliente,
+            final String htmlContent,
+            final Locale locale)
+            throws MessagingException {
+
+        // Prepare message using a Spring helper
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper message
+                = new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
+        message.setSubject("Email de cliente con cuenta " + emailContactoCliente.getEmail());
+        message.setFrom(emailContactoCliente.getEmail());
+        message.setTo(from);
+
+        // Prepare the evaluation context
+        final Context ctx = new Context(locale);
+        ctx.setVariable("name", emailContactoCliente.getNombre());
+        ctx.setVariable("telefono", emailContactoCliente.getTelefono());
+        ctx.setVariable("mensaje", emailContactoCliente.getMensaje());
+        ctx.setVariable("hora", new Date());
+        ctx.setVariable("empresa", empresaStore.getNombre());
+        ctx.setVariable("hobbies", Arrays.asList("Calidad", "Servicio", "Precios"));
+
+        // Create the HTML body using Thymeleaf
+        final String output = stringTemplateEngine.process(htmlContent, ctx);
+        message.setText(output, true /* isHtml */);
+
+        // Add the inline images, referenced from the HTML code as "cid:image-name"
+        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
+        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
+        message.addInline("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
+        message.addInline("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
+
+        // Send mail
+        this.mailSender.send(mimeMessage);
+    }
+    
     
 
 }

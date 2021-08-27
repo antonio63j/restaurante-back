@@ -1,46 +1,101 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title data-th-remove="all">Notificación de cuenta confirmada</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
-    <body>
-        <div style="background-color: rgb(255, 255, 0); background-image: url(images/background.png)"
-             data-th-style="|background-color: #ccc; background-image: url(cid:background)|">
-            <div style="padding: 40px;">
-                <div style="margin-left: auto; margin-right: auto; min-width: 320px; border: solid 1px #555; border-radius: 6px;">
-                    <div style="background-color: #555; padding: 4px 4px 2px 4px;">
-                        <div style="background-image: url(images/logo-background.png);"
-                             data-th-style="|background-image: url(cid:logo-background)|">
-                            <img style="border: solid 1px #555; border-radius: 6px;"
-                                 src="images/thymeleaf-banner.png" data-th-src="|cid:thymeleaf-banner|" />
-                        </div>
-                    </div>
-                    <div style="padding: 15px 15px 30px 15px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size:1em; background-color: #fff; color:#333;">
-                        <p>Hola <b data-th-text="${name}">Peter</b>:</p>
-                        
-                        <p>Resultado el proceso de activación: <b data-th-text="${resultado}">Resultado con éxito</b>.</p>
+<head>
+<title data-th-remove="all">Notificación de cuenta confirmada</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div
+		style="background-color: rgb(255, 255, 0); background-image: url(images/background.png)"
+		data-th-style="|background-color: #ccc; background-image: url(/images/background.png)|">
+		<div style="padding: 40px;">
+			<div
+				style="text-align: center; vertical-align: middle; min-width: 320px; border: solid 1px #555; border-radius: 6px;">
+				<div style="background-color: #555; padding: 2px 2px 2px 2px;">
+					<div style="background-image: url(/images/logo-background.png);"
+						data-th-style="|background-image: url(/images/logo-background.png)|">
+						<img style="border: solid 1px #555; border-radius: 6px;"
+							src="images/thymeleaf-banner.png"
+							th:src=@{/images/thymeleaf-banner.png} />
+					</div>
+				</div>
 
-                        <a href="details.html" th:href="${urlWeb}"target="_blank">Entrar</a>                    
-                        
-                        <br />
+				<div>
+					<h1 style="text-align: center; vertical-align: middle">
+						<b data-th-text="${empresa}">Cazuela Cortubí</b>
+					</h1>
+				</div>
+				<div
+					style="padding: 15px 15px 30px 15px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 1em; background-color: #fff; color: #333;">
+					<p>
+						Hola <b data-th-text="${name}">Peter</b>:
+					</p>
 
-                        <p> <br />
-                            a
-                            <span data-th-text="${#dates.format(fechaActivacion)}">28-12-2012</span><br />
-                            &emsp; <em>Un saludo,</em> <br />
-                            <p>Equipo <b data-th-text="${empresa}">Cazuela Cortubí</b>.</p>
-                        </p>
-                    </div>
-                    <div style="background-color: #555; padding: 4px 4px 0px 4px; text-align: right;">
-                        <div style="background-image: url(images/logo-background.png);"
-                             data-th-style="|background-image: url(cid:logo-background)|">
-                            <img style="border: solid 1px #555; border-radius: 6px;"
-                                 src="images/thymeleaf-logo.png" data-th-src="|cid:thymeleaf-logo|" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+					<p>
+						Resultado del proceso de activación: <b
+							data-th-text="${resultado}">Resultado con éxito</b>.
+					</p>
+
+					<a href="details.html" th:href="${urlWeb}" target="_blank">Entrar</a>
+
+					<br />
+
+					<p>
+						<br /> a <span data-th-text="${#dates.format(fechaActivacion)}">28-12-2012</span><br />
+						&emsp; <em>Un saludo,</em> <br />
+					<p>
+						Equipo <b data-th-text="${empresa}">Cazuela Cortubí</b>.
+					</p>
+					</p>
+				</div>
+				<div
+					style="background-color: #555; padding: 4px 4px 0px 4px; text-align: right;">
+					<div style="background-image: url(images/logo-background.png);"
+						data-th-style="|background-image: url(/images/logo-background.png)|">
+						<img style="border: solid 1px #555; border-radius: 6px;"
+							src="/images/thymeleaf-logo.png"
+							th:src=@{/images/thymeleaf-logo.png} />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    include css in the header
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+    <title>Adding Static Resources (css, JavaScript, Images) to Thymeleaf</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>
+            include image from static resources
+            <img th:src="@{/images/thymeleaf-banner.png}" alt="memorynotfound logo"/>
+            Adding Static Resources (css, JavaScript, Images) to Thymeleaf
+        </h1>
+    </div>
+
+    include javascript in the footer
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lib.js}"></script>
+
+</body>
+</html>
+
+ -->

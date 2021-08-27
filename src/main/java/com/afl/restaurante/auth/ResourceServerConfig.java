@@ -24,6 +24,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
+		
+                .antMatchers(HttpMethod.GET, "/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/mail/editablehtml/images/**").permitAll()
 
 				.antMatchers(HttpMethod.POST, "/api/usuario/registro").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/usuario/registro/confirmacion").permitAll()
@@ -31,7 +34,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/api/cuentaactivada").permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/usuario/resetpwd").permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/usuario/changepwd").permitAll()
-				
+				.antMatchers(HttpMethod.POST, "/api/usuario/emailCliente").permitAll()
+
 				// .antMatchers(HttpMethod.GET, "/api/adminindex").hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/adminindex").permitAll()
 				
@@ -126,7 +130,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:4321", "https://aflcv-front.web.app", "*"));
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:4321", "https://restaurante.fernandezlucena.es", "*"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
