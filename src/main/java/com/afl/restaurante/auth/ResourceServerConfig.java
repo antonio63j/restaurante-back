@@ -27,6 +27,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
                 .antMatchers(HttpMethod.GET, "/images/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/mail/editablehtml/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/css/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/webjars/**").permitAll()
 
 				.antMatchers(HttpMethod.POST, "/api/usuario/registro").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/usuario/registro/confirmacion").permitAll()
@@ -35,6 +37,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.antMatchers(HttpMethod.PUT, "/api/usuario/resetpwd").permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/usuario/changepwd").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/usuario/emailCliente").permitAll()
+
+				.antMatchers(HttpMethod.GET, "/api/politica-cookies").permitAll()
 
 				// .antMatchers(HttpMethod.GET, "/api/adminindex").hasAnyRole("ADMIN")
 				.antMatchers(HttpMethod.GET, "/api/adminindex").permitAll()

@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title data-th-remove="all">Notificación de cuenta confirmada</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="card contenedor">
+		<!-- 		<div class="card-header color-modal-header">
+ -->
+		<div class="card-header">
+
+			<h1
+				style="text-align: center; background-image: url(/images/background.png);">
+				<b data-th-text="${empresa.nombre}">Cazuela</b>
+			</h1>
+		</div>
+		<!-- 		<div class="card-title">Politica Privacidad</div> -->
+
+		<div class="card-body">
+
+
+			<div id="accordion">
+
+				<div class="card">
+					<div class="card-header" id="headingTwo">
+						<h5 class="mb-0">
+							<button class="btn btn-link collapsed" data-toggle="collapse"
+								data-target="#collapseTwo" aria-expanded="false"
+								aria-controls="collapseTwo">Política de privacidad</button>
+						</h5>
+					</div>
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+						data-parent="#accordion">
+						<div class="card-body">
+							<div
+								class="elementor-element elementor-element-d892c39 elementor-widget elementor-widget-heading"
+								data-id="d892c39" data-element_type="widget"
+								data-widget_type="heading.default">
+								<div class="elementor-widget-container">
+									<p>En cumplimiento de lo establecido en el Reglamento (UE)
+										2016/679 del Parlamento Europeo y del Consejo de 27 de abril
+										de 2016 relativo a la protecci&oacute;n de las personas
+										f&iacute;sicas en lo que respecta al tratamiento de datos
+										personales y a la libre circulaci&oacute;n de estos y en la
+										Ley Org&aacute;nica 3/2018, de 5 de diciembre, de
+										Protecci&oacute;n de Datos Personales y garant&iacute;a de los
+										derechos digitales, as&iacute; como en su normativa de
+										desarrollo, les facilitamos informaci&oacute;n ampliada en la
+										presente Pol&iacute;tica de Privacidad.</p>
+									<p>
+										<strong>Qui&eacute;n es el responsable del
+											tratamiento de sus datos</strong>
+									</p>
+									<ul>
+										<li>Identidad: <b data-th-text="${empresa.nombre}">Cazuela</b></li>
+										<li>CIF: cif la empresa</li>
+										<li>Direcci&oacute;n: <b data-th-text="${empresa.direccion}">Cazuela</b>
+										                      <b data-th-text="${empresa.provincia}">provincia</b>
+										</li>
+										<li>Tel&eacute;fono: <b data-th-text="${empresa.telefono}">provincia</b></li>
+										<li>Correo electr&oacute;nico: <b data-th-text="${empresa.email}">provincia</b></li>
+									</ul>
+									<p>
+										<strong>Con qu&eacute; finalidad tratamos sus datos
+											personales</strong>
+									</p>
+									<p>En la empresa tratamos la informaci&oacute;n que nos
+										facilitan las personas interesadas con el fin de prestar el
+										servicio de venta on-line de comida y su entrega a domicilio o
+										en nuestro local, as&iacute; como para el env&iacute;o de
+										comunicaciones comerciales.</p>
+									<p>
+										<strong>Por cu&aacute;nto tiempo conservaremos sus
+											datos</strong>
+									</p>
+									<p>Los datos personales proporcionados se
+										conservar&aacute;n por el tiempo imprescindible para la
+										realizaci&oacute;n de la venta online y durante los plazos
+										legalmente establecidos.</p>
+									<p>
+										<strong>Cu&aacute;l es la legitimaci&oacute;n para el
+											tratamiento de sus datos</strong>
+									</p>
+									<p>La base legal para el tratamiento de sus datos es la
+										ejecuci&oacute;n de la venta online, el consentimiento del
+										interesado y el inter&eacute;s leg&iacute;timo.</p>
+									<p>El tratamiento de datos para el env&iacute;o de
+										comunicaciones comerciales (por correo electr&oacute;nico o
+										SMS) a nuestros clientes, contactos comerciales y/o usuarios
+										que se hayan registrado en nuestra web se ampara en el
+										inter&eacute;s leg&iacute;timo establecido en el Reglamento
+										Europeo de Protecci&oacute;n de Datos y en la Ley de Servicios
+										para la Sociedad de la Informaci&oacute;n y de Comercio
+										Electr&oacute;nico. Si prefiere no recibir estos mensajes por
+										correo electr&oacute;nico o SMS le ofreceremos a trav&eacute;s
+										de los mismos la posibilidad de ejercer su derecho de
+										oposici&oacute;n a dicho tratamiento.</p>
+									<p>
+										<strong>A qu&eacute; destinatarios se
+											comunicar&aacute;n sus datos</strong>
+									</p>
+									<p>Para cumplir las finalidades indicadas en la presente
+										Pol&iacute;tica de Privacidad y Cookies, es necesario que
+										demos acceso a tus datos personales a entidades de&nbsp;La
+										Nadadora&nbsp;y a terceras partes que nos presten apoyo en los
+										servicios que te ofrecemos, a saber:</p>
+									<p>
+										&ndash;
+										proveedores y colaboradores de servicios de log&iacute;stica,
+										transporte y entrega,<br />
+									</p>
+									<p>No se comunicar&aacute;n a otros terceros salvo para
+										cumplir con las obligaciones legales.</p>
+										<strong>Cu&aacute;les son sus derechos cuando nos
+											facilita sus datos</strong>
+									</p>
+									<p>Cualquier persona tiene derecho a obtener
+										informaci&oacute;n sobre si <b data-th-text="${empresa.nombre}">nuestro restaurante</b> estamos tratando datos
+										personales que les conciernan, o no. Las personas interesadas
+										tienen derecho a acceder a sus datos personales, as&iacute;
+										como a solicitar la rectificaci&oacute;n de los datos
+										inexactos o, en su caso, solicitar su supresi&oacute;n cuando,
+										entre otros motivos, los datos ya no sean necesarios para los
+										fines que fueron recogidos.</p>
+									<p>En determinadas circunstancias, los interesados
+										podr&aacute;n solicitar la limitaci&oacute;n del tratamiento
+										de sus datos, en cuyo caso &uacute;nicamente los conservaremos
+										para el ejercicio o la defensa de reclamaciones.</p>
+									<p>En determinadas circunstancias y por motivos
+										relacionados con su situaci&oacute;n particular, los
+										interesados podr&aacute;n oponerse al tratamiento de sus
+										datos. En este caso, <b data-th-text="${empresa.nombre}">nuestro restaurante</b> dejar&aacute; de tratar los
+										datos, salvo por motivos leg&iacute;timos imperiosos, o el
+										ejercicio o la defensa de posibles reclamaciones.</p>
+									<p>Podr&aacute; ejercitar materialmente sus derechos
+										enviando un correo electr&oacute;nico a
+										<b data-th-text="${empresa.email}">nuestro restaurante</b> identific&aacute;ndose debidamente e
+										indicando de forma expresa el concreto derecho que se quiere
+										ejercer.</p>
+									<p>Si ha otorgado su consentimiento para alguna finalidad
+										concreta, tiene derecho a retirar el consentimiento otorgado
+										en cualquier momento, sin que ello afecte a la licitud del
+										tratamiento basado en el consentimiento previo a su retirada.
+										En caso de que sienta vulnerados sus derechos en lo
+										concerniente a la protecci&oacute;n de sus datos personales,
+										especialmente cuando no haya obtenido satisfacci&oacute;n en
+										el ejercicio de sus derechos, puede dirigirse al Delegado de
+										Protecci&oacute;n de Datos, si ha sido designado, o presentar
+										una reclamaci&oacute;n ante la Autoridad de Control en materia
+										de Protecci&oacute;n de Datos competente a trav&eacute;s de su
+										sitio web: www.agpd.es</p>
+									<p>
+										<strong>M&aacute;s informaci&oacute;n sobre el
+											tratamiento de sus datos</strong>
+									</p>
+									<p>Cuando precisemos obtener informaci&oacute;n por su
+										parte, siempre le solicitaremos que nos la proporcione
+										voluntariamente prestando su consentimiento de forma expresa a
+										trav&eacute;s de los medios habilitados para ello.</p>
+									<p>El tratamiento de los datos recabados a trav&eacute;s de
+										los formularios de recogida de datos del sitio web, quedar&aacute; incorporado al Registro de
+										Actividades de Tratamiento del cual es responsable <b data-th-text="${empresa.nombre}">Cazuela</b>. <b data-th-text="${empresa.nombre}">Cazuela</b> trata los datos de forma confidencial y
+										adopta las medidas t&eacute;cnicas y organizativas apropiadas
+										para garantizar el nivel de seguridad adecuado al tratamiento,
+										en cumplimiento de lo requerido por el Reglamento (UE)
+										2016/679 del Parlamento Europeo y del Consejo de 27 de abril
+										de 2016 y dem&aacute;s normativa aplicable en materia de
+										Protecci&oacute;n de Datos. No obstante, <b data-th-text="${empresa.nombre}">Cazuela</b> no puede
+										garantizar la absoluta invulnerabilidad de los sistemas, por
+										tanto, no asume ninguna responsabilidad por los da&ntilde;os y
+										perjuicios derivados de alteraciones que terceros puedan
+										causar en los sistemas inform&aacute;ticos, documentos
+										electr&oacute;nicos o ficheros del usuario. Si opta por
+										abandonar nuestro sitio web a trav&eacute;s de enlaces a
+										sitios web no pertenecientes a nuestra entidad, <b data-th-text="${empresa.nombre}">Cazuela</b>;
+										no se har&aacute; responsable de las pol&iacute;ticas de
+										privacidad de dichos sitios web ni de las cookies que
+										&eacute;stos puedan almacenar en el ordenador del usuario.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingThree">
+						<h5 class="mb-0">
+							<button class="btn btn-link collapsed" data-toggle="collapse"
+								data-target="#collapseThree" aria-expanded="false"
+								aria-controls="collapseThree">Términos del servicio</button>
+						</h5>
+					</div>
+					<div id="collapseThree" class="collapse"
+						aria-labelledby="headingThree" data-parent="#accordion">
+						<div class="card-body">
+							<div
+								class="elementor-element elementor-element-d892c39 elementor-widget elementor-widget-heading"
+								data-id="d892c39" data-element_type="widget"
+								data-widget_type="heading.default">
+								<div class="elementor-widget-container">
+									<h2 class="elementor-heading-title elementor-size-default">T&eacute;rminos
+										del servicio</h2>
+								</div>
+							</div>
+							<div
+								class="elementor-element elementor-element-d4b1f9d elementor-widget elementor-widget-text-editor"
+								data-id="d4b1f9d" data-element_type="widget"
+								data-widget_type="text-editor.default">
+								<div class="elementor-widget-container">
+									<div class="elementor-text-editor elementor-clearfix">
+										<p style="text-align: justify;">La empresa, trata de
+											garantizar la disponibilidad de todos los platos que cada
+											semana est&eacute;n publicitados en su web, sin embargo,
+											debido a la naturaleza del producto, puede suspenderse la
+											disponibilidad de un producto durante plazo no superiores a 5
+											d&iacute;as. La Nadadora no se responsabiliza de los
+											da&ntilde;os o perjuicios que puedan producirse al USUARIO
+											consecuencia de fallos o desconexiones en las redes de
+											telecomunicaciones y que ocasionen suspensi&oacute;n,
+											cancelaci&oacute;n o interrupci&oacute;n del servicio de
+											lanadadora.com durante la prestaci&oacute;n del mismo.</p>
+										<p style="text-align: justify;">Para realizar cualquier
+											compra en la web de la empresa, es necesario que el cliente
+											sea mayor de edad. Adem&aacute;s ser&aacute; preciso que el
+											cliente se registre en la empresa a trav&eacute;s de un
+											formulario de recogida de datos en el que se proporcione la
+											informaci&oacute;n necesaria para la compra; datos que en
+											cualquier caso ser&aacute;n veraces, exactos y completos
+											sobre su identidad y que el cliente deber&aacute; consentir
+											expresamente mediante la aceptaci&oacute;n de la
+											pol&iacute;tica de privacidad de La Nadadora.</p>
+										<p>Los pasos a seguir para realizar la compra son:</p>
+										<ul>
+											<li style="text-align: justify;">Seleccionar los platos
+												en la p&aacute;gina web y clickar en
+												&ldquo;A&ntilde;adir&rdquo; para incorporar al carrito.</li>
+											<li style="text-align: justify;">Ver carrito. Aparecen
+												en pantalla los productos seleccionados, las unidades de
+												cada uno con el precio individual y el precio total.</li>
+											<li style="text-align: justify;">Finalizar pedido. Una
+												vez finalizado el pedido el Usuario determinara si recoge el
+												pedido en el propio restaurante o si quiere que se lo
+												llevemos a casa, para ello debera a&ntilde;adir un
+												domicilio, para ello puede hacer click en el bot&oacute;n
+												dedicado o entrar en su perfil y a&ntilde;adirlo.</li>
+											<li style="text-align: justify;">El pago del pedido se
+												entregar&aacute; a la persona que lleva el pedido a su
+												domicilio o en el propio restaurante.</li>
+											<li style="text-align: justify;">Durante todo el proceso
+												el usuario podr&aacute; ver el pedido y precio.</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse"
+								data-target="#collapseOne" aria-expanded="true"
+								aria-controls="collapseOne">Política de cookies</button>
+						</h5>
+					</div>
+
+					<div id="collapseOne" class="collapse show"
+						aria-labelledby="headingOne" data-parent="#accordion">
+						<div class="card-body">
+							<p style="text-align: justify;">Este sitio web
+								&uacute;nicamente utiliza cookies propias de car&aacute;cter
+								t&eacute;cnico, no se recaba informaci&oacute;n personal con la
+								intenci&oacute;n de cederla a terceros. La &uacute;nica
+								informaci&oacute;n almacenada en cookies o bases de datos del
+								servidor, es la que el propio usuario proporciona al registrase
+								o al confeccionar pedidos.</p>
+							<p>
+								<strong>1. &iquest;Qu&eacute; son las Cookies?</strong>
+							</p>
+							<p style="text-align: justify;">Las Cookies son archivos que
+								los sitios web o las aplicaciones instalan en el navegador o en
+								el dispositivo (smartphone, tablet o televisi&oacute;n
+								conectada) del usuario durante su recorrido por las
+								p&aacute;ginas del sitio o por la aplicaci&oacute;n, y sirven
+								para almacenar informaci&oacute;n sobre su visita.</p>
+							<p>Como la mayor&iacute;a de los sitios en internet, este
+								sitio web utiliza Cookies para:</p>
+							<ol>
+								<li>Asegurar que las p&aacute;ginas web pueden funcionar
+									correctamente.</li>
+								<li>Almacenar las preferencias, como el idioma que ha
+									seleccionado o el tama&ntilde;o de letra.</li>
+								<li>Conocer la experiencia de navegaci&oacute;n del
+									usuario.</li>
+								<li>Recopilar informaci&oacute;n estad&iacute;stica
+									an&oacute;nima, como qu&eacute; p&aacute;ginas ha visitado el
+									usuario o cu&aacute;nto tiempo ha permanecido en el sitio web.</li>
+							</ol>
+							<p style="text-align: justify;">El uso de Cookies permite
+								optimizar la navegaci&oacute;n, adaptando la informaci&oacute;n
+								y los servicios ofrecidos a los intereses del usuario, para
+								proporcionarle una mejor experiencia siempre que visita el sitio
+								web.</p>
+							<p style="text-align: justify;">Este sitio web utiliza
+								Cookies para funcionar, adaptar y facilitar al m&aacute;ximo la
+								navegaci&oacute;n del usuario.</p>
+							<p>
+								<strong>2. Tipolog&iacute;a, finalidad y funcionamiento</strong>
+							</p>
+							<p style="text-align: justify;">Las Cookies, en
+								funci&oacute;n de su permanencia, pueden dividirse en cookies de
+								sesi&oacute;n o permanentes. Las primeras expiran cuando el
+								usuario cierra el navegador. Las segundas expiran cuando se
+								cumple el objetivo para el que sirven (por ejemplo, para que el
+								usuario se mantenga identificado en el sitio web) o bien cuando
+								se borran manualmente.</p>
+							<p>Adicionalmente, en funci&oacute;n de su objetivo, las
+								Cookies pueden clasificarse de la siguiente forma:</p>
+							<ol>
+								<li style="text-align: justify;"><span
+									style="color: #000080;">Estrictamente necesarias
+										(t&eacute;cnicas):</span> Son aquellas imprescindibles para el
+									correcto funcionamiento de la p&aacute;gina. Normalmente se
+									generan cuando el usuario accede al sitio web o inicia
+									sesi&oacute;n en el mismo y se utilizan para identificarle en
+									el sitio web con los siguientes objetivos:
+									<ul>
+										<li>Mantener al usuario identificado de forma que, si
+											abandona el sitio web, el navegador o el dispositivo y en
+											otro momento vuelve a acceder a dicho sitio web,
+											seguir&aacute; identificado, facilitando as&iacute; su
+											navegaci&oacute;n sin tener que volver a identificarse.</li>
+										<li>Comprobar si el usuario est&aacute; autorizado para
+											acceder a ciertos servicios o zonas del sitio web</li>
+									</ul></li>
+								<li style="text-align: justify;"><span
+									style="color: #000080;">De rendimiento:</span> Se utilizan para
+									mejorar la experiencia de navegaci&oacute;n y optimizar el
+									funcionamiento del sitio web, como por ejemplo, almacenar las
+									configuraciones de servicios, o almacenar la compra realizada
+									en un carrito de la compra.</li>
+								<li style="text-align: justify;"><span
+									style="color: #000080;">De publicidad:</span> Son aquellas que
+									recaban informaci&oacute;n sobre los anuncios mostrados a los
+									usuarios del sitio web. Pueden ser de dos tipos:
+									<ul>
+										<li style="text-align: justify;">An&oacute;nimas: Solo
+											recopilan informaci&oacute;n sobre los espacios publicitarios
+											mostrados en el sitio web, con independencia del usuario que
+											accede al sitio web, es decir, sin identificarle
+											expresamente.</li>
+									</ul></li>
+								<ul>
+									<li style="text-align: justify;">Personalizadas: Recopilan
+										informaci&oacute;n personal del usuario del sitio web por
+										parte de un tercero, para la personalizaci&oacute;n de dichos
+										espacios publicitarios.</li>
+								</ul>
+								<li style="text-align: justify;"><span
+									style="color: #000080;">De geo-localizaci&oacute;n:</span>
+									Estas Cookies se utilizan para averiguar en qu&eacute;
+									pa&iacute;s o regi&oacute;n se encuentra el usuario cuando
+									accede a un servicio del sitio web con el fin de ofrecerle
+									contenidos o servicios adecuados a su localizaci&oacute;n.</li>
+								<li style="text-align: justify;">De anal&iacute;ticas:
+									Recopilan informaci&oacute;n sobre la experiencia de
+									navegaci&oacute;n del usuario en el sitio web, normalmente de
+									forma an&oacute;nima, aunque en ocasiones tambi&eacute;n
+									permiten identificar de manera &uacute;nica e inequ&iacute;voca
+									al usuario con el fin de obtener informes sobre los intereses
+									de los usuarios en los servicios que ofrece el sitio web.</li>
+							</ol>
+							<p>
+								<br /> <strong>3. Cookies utilizadas en este sitio web</strong>
+							</p>
+							<p style="text-align: justify;">Cookies t&eacute;cnicas
+								estrictamente necesarias para la prestaci&oacute;n del propio
+								servicio solicitado por el usuario.</p>
+							<p>
+								<strong>4. Deshabilitar el uso de Cookies</strong>
+							</p>
+							<p style="text-align: justify;">Si el usuario as&iacute; lo
+								desea, es posible dejar de aceptar las Cookies del navegador, o
+								dejar de aceptar las Cookies de un servicio en particular.</p>
+							<p style="text-align: justify;">Todos los navegadores
+								modernos permiten cambiar la configuraci&oacute;n de Cookies.
+								Estos ajustes normalmente se encuentran en las
+								&ldquo;Opciones&rdquo; o &ldquo;Preferencias&rdquo; del
+								men&uacute; del navegador.</p>
+							<p style="text-align: justify;">El usuario podr&aacute;, en
+								cualquier momento, deshabilitar el uso de Cookies en este sitio
+								web mediante:</p>
+							<p>La configuraci&oacute;n del navegador, por ejemplo:</p>
+							<p>
+								Google Chrome: <a
+									href="http://support.google.com/chrome/bin/answer.py?hl=es&amp;answer=95647">http://support.google.com/chrome/bin/answer.py?hl=es&amp;answer=95647</a>
+							</p>
+							<p>
+								Internet Explorer: <a
+									href="http://windows.microsoft.com/es-es/windows7/how-to-manage-cookies-in-internet-explorer-9">http://windows.microsoft.com/es-es/windows7/how-to-manage-cookies-in-internet-explorer-9</a>
+							</p>
+							<p>
+								Mozilla Firefox: <a
+									href="http://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-que-los-sitios-we">http://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-que-los-sitios-we</a>
+							</p>
+							<p>
+								Apple Safari: <a href="http://support.apple.com/kb/ph5042">http://support.apple.com/kb/ph5042</a>
+							</p>
+							<p style="text-align: justify;">Otras herramientas de
+								terceros, disponibles on-line, que permiten a los usuarios
+								detectar las Cookies en cada sitio web que visita y gestionar su
+								desactivaci&oacute;n (por ejemplo, Ghostery:
+								http://www.ghostery.com/privacy-statement).</p>
+							<p>
+								<strong>5. &iquest;Qu&eacute; ocurre al deshabilitar
+									las Cookies?</strong>
+							</p>
+							<p style="text-align: justify;">Algunas funcionalidades y
+								servicios pueden quedar deshabilitados o tener un comportamiento
+								diferente al esperado como, por ejemplo, permanecer
+								identificado, mantener las compras en el &ldquo;carrito de la
+								compra&rdquo; en un servicio de comercio electr&oacute;nico o
+								recibir informaci&oacute;n dirigida a su localizaci&oacute;n,
+								entre otros.</p>
+							<p style="text-align: justify;">Si deshabilita el uso de
+								Cookies en este sitio web es probable que deje de poder acceder
+								a ciertas zonas del mismo o que se degrade notablemente la
+								experiencia de navegaci&oacute;n en el mismo.</p>
+							<p>
+								<strong>6. Actualizaci&oacute;n de la Pol&iacute;tica
+									de cookies</strong>
+							</p>
+							<p style="text-align: justify;">
+								<b data-th-text="${empresa.nombre}">Cazuela</b> puede modificar
+								esta Pol&iacute;tica de cookies en funci&oacute;n de exigencias
+								legislativas, reglamentarias, o con la finalidad de adaptar
+								dicha pol&iacute;tica a las instrucciones dictadas por la
+								Agencia Espa&ntilde;ola de Protecci&oacute;n de Datos, por ello
+								se aconseja a los usuarios que la visiten peri&oacute;dicamente.
+							</p>
+							<p style="text-align: justify;">Cuando se produzcan cambios
+								significativos en esta Pol&iacute;tica de cookies, se
+								comunicar&aacute; a los usuarios bien mediante la web o a
+								trav&eacute;s de correo electr&oacute;nico a los usuarios
+								registrados.</p>
+							<p>&nbsp;</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer" style="text-align: right;">
+				<div style="background-image: url(images/logo-background.png);"
+					data-th-style="|background-image: url(/images/logo-background.png)|">
+					<img style="border: solid 1px #555; border-radius: 6px;"
+						src="/images/thymeleaf-logo.png"
+						th:src=@{/images/thymeleaf-logo.png} />
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    include css in the header
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+    <title>Adding Static Resources (css, JavaScript, Images) to Thymeleaf</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>
+            include image from static resources
+            <img th:src="@{/images/thymeleaf-banner.png}" alt="memorynotfound logo"/>
+            Adding Static Resources (css, JavaScript, Images) to Thymeleaf
+        </h1>
+    </div>
+
+    include javascript in the footer
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lib.js}"></script>
+
+</body>
+</html>
+
+ -->

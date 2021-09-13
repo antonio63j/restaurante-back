@@ -267,8 +267,8 @@ public class EmailService {
         message.setText(output, true /* isHtml */);
 
         // Add the inline images, referenced from the HTML code as "cid:image-name"
-        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
-        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
+//        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
+//        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
         message.addInline("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
         message.addInline("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
 
@@ -317,8 +317,8 @@ public class EmailService {
         message.setText(output, true /* isHtml */);
 
         // Add the inline images, referenced from the HTML code as "cid:image-name"
-        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
-        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
+//        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
+//        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
         message.addInline("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
         message.addInline("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
 
@@ -346,11 +346,12 @@ public class EmailService {
         final MimeMessageHelper message
                 = new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
         message.setSubject("Email de cliente con cuenta " + emailContactoCliente.getEmail());
-        message.setFrom(emailContactoCliente.getEmail());
+        message.setFrom(from);
         message.setTo(from);
 
         // Prepare the evaluation context
         final Context ctx = new Context(locale);
+        ctx.setVariable("cuenta", emailContactoCliente.getEmail());
         ctx.setVariable("name", emailContactoCliente.getNombre());
         ctx.setVariable("telefono", emailContactoCliente.getTelefono());
         ctx.setVariable("mensaje", emailContactoCliente.getMensaje());
@@ -363,10 +364,13 @@ public class EmailService {
         message.setText(output, true /* isHtml */);
 
         // Add the inline images, referenced from the HTML code as "cid:image-name"
-        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
-        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
-        message.addInline("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
-        message.addInline("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
+//        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
+//        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
+          message.addInline("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
+          message.addInline("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
+
+//        message.addAttachment("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
+//        message.addAttachment("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
 
         // Send mail
         this.mailSender.send(mimeMessage);

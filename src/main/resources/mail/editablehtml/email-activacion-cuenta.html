@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title data-th-remove="all">Template for HTML email (editable)</title>
+<title data-th-remove="all">Email activación de cuenta</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div
-		style="background-color: rgb(255, 255, 0); background-image: url(images/background.png)"
-		data-th-style="|background-color: #ccc; background-image: url(cid:background)|">
-		<div style="padding: 40px;">
+		style="padding: 10px 10px 10px 10px; background-color: rgb(197, 194, 212);">
+		<div style="padding: 10px 10px 10px 10px;">
 			<div
 				style="text-align: center; vertical-align: middle; min-width: 320px; border: solid 1px #555; border-radius: 6px;">
-				<div style="background-color: #555; padding: 2px 2px 2px 2px;">
-					<div style="background-image: url(images/logo-background.png);"
-						data-th-style="|background-image: url(cid:logo-background)|">
-						<img style="border: solid 1px #555; border-radius: 6px;"
-							src="images/thymeleaf-banner.png"
-							data-th-src="|cid:thymeleaf-banner|" />
-					</div>
+				<div
+					style="background-color: rgb(214, 113, 36); padding: 2px 2px 2px 2px;">
+					<img style="border: solid 1px #555; border-radius: 6px;"
+						src="cid:thymeleaf-banner" />
 				</div>
 
 				<div>
@@ -54,13 +50,9 @@
 					</p>
 				</div>
 				<div
-					style="background-color: #555; padding: 4px 4px 0px 4px; text-align: right;">
-					<div style="background-image: url(images/logo-background.png);"
-						data-th-style="|background-image: url(cid:logo-background)|">
-						<img style="border: solid 1px #555; border-radius: 6px;"
-							src="images/thymeleaf-logo.png"
-							data-th-src="|cid:thymeleaf-logo|" />
-					</div>
+					style="background-color: rgb(98, 95, 114); padding: 4px 4px 0px 4px; text-align: right;">
+					<img style="border: solid 1px #555; border-radius: 6px;"
+						th:src="|cid:thymeleaf-logo|" />
 				</div>
 			</div>
 		</div>

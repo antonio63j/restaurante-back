@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/afl/restaurante/dao/IClienteDao.java|com/afl/restaurante/dao/ICursoDao.java|com/afl/restaurante/dao/IHerramientaDao.java|com/afl/restaurante/dao/IProyectoDao.java|com/afl/restaurante/entities/Cliente.java|com/afl/restaurante/entities/Curso.java|com/afl/restaurante/entities/Herramienta.java|com/afl/restaurante/entities/Proyecto.java|com/afl/restaurante/controllers/ClienteController.java|com/afl/restaurante/controllers/CursoController.java|com/afl/restaurante/controllers/HerramientaController.java|com/afl/restaurante/controllers/ProyectoController.java|com/afl/restaurante/services/ClienteServiceImpl.java|com/afl/restaurante/services/CursoServiceImpl.java|com/afl/restaurante/services/HerramientaServiceImpl.java|com/afl/restaurante/services/IClienteService.java|com/afl/restaurante/services/ICursoService.java|com/afl/restaurante/services/IHerramientaService.java|com/afl/restaurante/services/IProyectoService.java|com/afl/restaurante/services/ProyectoServiceImpl.java" including="**/*.java" kind="src" output="target/classes" path="src/main/java">
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
