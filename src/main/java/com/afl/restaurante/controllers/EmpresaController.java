@@ -118,7 +118,9 @@ public class EmpresaController {
 		}
 		try {
 			empresaActual.setNombre(empresa.getNombre());
+			empresaActual.setCif(empresa.getCif());
 			empresaActual.setDireccion(empresa.getDireccion());
+			empresaActual.setLocalidad(empresa.getLocalidad());
 			empresaActual.setProvincia(empresa.getProvincia());
 			empresaActual.setTelefono(empresa.getTelefono());
 			empresaActual.setEmail(empresa.getEmail());
@@ -404,7 +406,9 @@ public class EmpresaController {
 	
 	private void setDatosEmpresaStore (Empresa empresa) {
 		empresaStore.setNombre(empresa.getNombre());
+		empresaStore.setCif(empresa.getCif());
 		empresaStore.setDireccion(empresa.getDireccion());
+		empresaStore.setLocalidad(empresa.getLocalidad());
 		empresaStore.setProvincia(empresa.getProvincia());
 		empresaStore.setTelefono(empresa.getTelefono());
 		empresaStore.setEmail(empresa.getEmail());

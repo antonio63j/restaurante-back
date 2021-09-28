@@ -59,8 +59,9 @@
 									</p>
 									<ul>
 										<li>Identidad: <b data-th-text="${empresa.nombre}">Cazuela</b></li>
-										<li>CIF: cif la empresa</li>
-										<li>Direcci&oacute;n: <b data-th-text="${empresa.direccion}">Cazuela</b>
+										<li>CIF: <b data-th-text="${empresa.cif}">CIF</b></li>
+										<li>Direcci&oacute;n: <b data-th-text="${empresa.direccion}">Direccion</b>,
+										                      <b data-th-text="${empresa.localidad}">Localidad</b>-
 										                      <b data-th-text="${empresa.provincia}">provincia</b>
 										</li>
 										<li>Tel&eacute;fono: <b data-th-text="${empresa.telefono}">provincia</b></li>
@@ -273,7 +274,7 @@
 						aria-labelledby="headingOne" data-parent="#accordion">
 						<div class="card-body">
 							<p style="text-align: justify;">Este sitio web
-								&uacute;nicamente utiliza cookies propias de car&aacute;cter
+								&uacute;nicamente utiliza cookies de car&aacute;cter
 								t&eacute;cnico, no se recaba informaci&oacute;n personal con la
 								intenci&oacute;n de cederla a terceros. La &uacute;nica
 								informaci&oacute;n almacenada en cookies o bases de datos del

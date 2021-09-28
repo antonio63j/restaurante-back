@@ -39,13 +39,21 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true, length = 60)
+	@Column(unique = true, length = 30)
 	@NotNull
 	@NotEmpty
+	@Size(min = 2, max=30, message="debe tener de 4 a 30 posiciones")
 	private String nombre;
+	
+	@Column (name ="cif", length = 9)
+	private String cif;
+
 	
 	@Column (name ="direccion", length = 60)
 	private String direccion;
+	
+	@Column (name ="localidad", length = 40)
+	private String localidad;
 	
 	@Column (name ="provincia")
 	@Size(min = 4, max=30, message="debe tener de 4 a 30 posiciones")
