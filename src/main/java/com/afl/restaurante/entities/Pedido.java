@@ -72,11 +72,11 @@ public class Pedido implements Serializable {
     
 	@Column(columnDefinition = "TIMESTAMP")
 //	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="d/M/yyyy H:m:s")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="d/M/yyyy, H:m:s")
 	private LocalDateTime fechaRegistro;
 
     @Column(columnDefinition = "TIMESTAMP")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="d/M/yyyy H:m:s")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="d/M/yyyy, H:m:s")
 	private LocalDateTime fechaEntrega;
 
 	private String nota;

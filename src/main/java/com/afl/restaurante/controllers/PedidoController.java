@@ -507,11 +507,8 @@ public class PedidoController {
 	}
 	
 	private LocalDateTime getLocalDateTime(String strDateTime) {
-        Locale bLocale = new Locale.Builder().setLanguage("en").setRegion("ES").build();
-                                                       //          01234567890123456789012345678901234567890
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss zzzz", bLocale);
-    	// String dh = strDateTime.replace("%2B", "+");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy H:m:s");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy, H:m:s");
         LocalDateTime date = LocalDateTime.parse(strDateTime, formatter);
     	return date;
 	}
